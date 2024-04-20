@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import React from 'react';
@@ -12,26 +13,30 @@ const Navbar = () => {
 
   return (
     <div
-      className="navbar bg-base-100 sticky top-0 z-10 lg:relative"
+      className={cn(
+        'bg-base-100',
+        'sticky top-0 z-10 lg:relative border-b border-base-300/30',
+      )}
       data-theme={theme}
     >
-      <div className="navbar-start">
-        <div className="lg:hidden">
-          <Drawer />
+      <div className={cn('navbar bg-base-100', 'container mx-auto')}>
+        <div className="navbar-start">
+          <div className="lg:hidden">
+            <Drawer />
+          </div>
+          <a className="btn btn-ghost text-xl">
+            <span>Dayi</span>[<span className="text-pink-300">AI</span>]
+          </a>
         </div>
-        <a className="btn btn-ghost text-xl">
-          <span>Dayi</span>[<span className="text-pink-300">AI</span>]
-        </a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navigation.map((navItem) => (
-            <li key={navItem.title}>
-              <Link href={navItem.linkUrl}>{navItem.title}</Link>
-            </li>
-          ))}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {navigation.map((navItem) => (
+              <li key={navItem.title}>
+                <Link href={navItem.linkUrl}>{navItem.title}</Link>
+              </li>
+            ))}
 
-          {/* <li>
+            {/* <li>
             <details>
               <summary>Parent</summary>
               <ul className="p-2 z-10">
@@ -44,10 +49,11 @@ const Navbar = () => {
               </ul>
             </details>
           </li> */}
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <ThemeController />
+          </ul>
+        </div>
+        <div className="navbar-end">
+          <ThemeController />
+        </div>
       </div>
     </div>
   );

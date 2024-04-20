@@ -33,7 +33,7 @@ const Card = ({
     <div
       className={cn(
         'card w-full bg-base-100 shadow-xl card-side card-compact',
-        'm-auto lg:min-h-60 lg:min-w-96 h-52 max-w-80 lg:max-w-none',
+        'm-auto lg:min-h-60 lg:min-w-96 h-52 max-w-80 lg:max-w-none lg:p-0',
       )}
     >
       <figure className="w-2/6 lg:w-5/12">

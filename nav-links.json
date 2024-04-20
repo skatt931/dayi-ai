@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Головна",
+    "linkUrl": "/"
+  },
+  {
+    "title": "Блоги",
+    "linkUrl": "/blogs"
+  },
+  {
+    "title": "Контакти",
+    "linkUrl": "/contact"
+  },
+  {
+    "title": "Про нас",
+    "linkUrl": "/about"
+  }
+]

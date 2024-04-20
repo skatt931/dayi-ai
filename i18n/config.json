@@ -1,0 +1,22 @@
+[
+  {
+    "code": "en",
+    "localName": "English",
+    "name": "English",
+    "langDir": "ltr",
+    "dateFormat": "MM.DD.YYYY",
+    "hrefLang": "en-GB",
+    "enabled": true,
+    "default": false
+  },
+  {
+    "code": "uk",
+    "localName": "Українська",
+    "name": "Ukrainian",
+    "langDir": "ltr",
+    "dateFormat": "DD.MM.YYYY",
+    "hrefLang": "uk",
+    "enabled": true,
+    "default": true
+  }
+]

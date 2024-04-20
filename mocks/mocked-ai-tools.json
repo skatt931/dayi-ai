@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "createdAt": "",
+    "tags": ["AI Detection"],
+    "specialTags": ["Зроблено в Україні"],
+    "title": "Chat GPT",
+    "shortDescription": "Open ai генератор тексту",
+    "completeDescription": "Open ai генератор тексту",
+    "imageUrl": "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
+    "pricing": "freemium",
+    "linkToTool": "https://openai.com",
+    "likes": 0
+  },
+  {
+    "id": 2,
+    "createdAt": "",
+    "tags": [],
+    "specialTags": [],
+    "title": "Gemini",
+    "shortDescription": "Google застосунок ШІ для генерації контенту",
+    "completeDescription": "Google застосунок ШІ для генерації контенту",
+    "imageUrl": "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
+    "pricing": "freemium",
+    "linkToTool": "gemini.com",
+    "likes": 5
+  },
+  {
+    "id": 3,
+    "createdAt": "",
+    "tags": [],
+    "specialTags": [],
+    "title": "Gemini",
+    "shortDescription": "Google застосунок ШІ для генерації контенту i ще трохи дового тексту який би не вміщався у контент і ще трошки довше",
+    "completeDescription": "Google застосунок ШІ для генерації контенту i ще трохи дового тексту який би не вміщався у контент і ще трошки довше",
+    "imageUrl": "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
+    "pricing": "freemium",
+    "linkToTool": "gemini.com",
+    "likes": 0
+  },
+  {
+    "id": 4,
+    "createdAt": "",
+    "tags": [],
+    "specialTags": [],
+    "title": "Gemini",
+    "shortDescription": "Google застосунок ШІ для генерації контенту",
+    "completeDescription": "Google застосунок ШІ для генерації контенту",
+    "imageUrl": "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
+    "pricing": "freemium",
+    "linkToTool": "gemini.com",
+    "likes": 220
+  },
+  {
+    "id": 5,
+    "createdAt": "",
+    "tags": [],
+    "specialTags": [],
+    "title": "Gemini",
+    "shortDescription": "Google застосунок ШІ для генерації контенту",
+    "completeDescription": "Google застосунок ШІ для генерації контенту",
+    "imageUrl": "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
+    "pricing": "freemium",
+    "linkToTool": "gemini.com",
+    "likes": 2
+  }
+]

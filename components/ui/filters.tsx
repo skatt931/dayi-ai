@@ -51,7 +51,7 @@ const Filters = ({ filtersData }: { filtersData: TagsData[] }) => {
               arial-label="ai detection"
               onChange={(e) => handleChange(e.target.checked, filter.name)}
             />
-            <div className={cn('label-text', 'cursor-pointer text-xs')}>
+            <div className={cn('label-text', 'cursor-pointer text-sm')}>
               {filter.name}
             </div>
           </label>

@@ -14,7 +14,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <header
+    <div
       className={cn(
         'bg-base-100',
         'sticky top-0 z-10 lg:relative border-b border-base-300/30',
@@ -27,16 +27,14 @@ const Navbar = () => {
             <Drawer />
           </div>
           <Link href={`${pathname}`} className="btn btn-ghost text-xl">
-            <span>Dayi</span>[<span className="text-pink-400">AI</span>]
+            <span>Дай</span>[<span className="text-pink-400">AI</span>]
           </Link>
         </div>
         <nav className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {navigation.map((navItem) => (
               <li key={navItem.title}>
-                <Link href={`${pathname}${navItem.linkUrl}`}>
-                  {navItem.title}
-                </Link>
+                <Link href={`/uk/${navItem.linkUrl}`}>{navItem.title}</Link>
               </li>
             ))}
           </ul>
@@ -45,7 +43,7 @@ const Navbar = () => {
           <ThemeController />
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 

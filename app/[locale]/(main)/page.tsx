@@ -28,7 +28,7 @@ const filtersData = [
   {
     id: 3,
     tag: 'natural-language-processing',
-    name: 'Natural Language Processing',
+    name: 'Natural Language',
   },
   {
     id: 4,
@@ -126,7 +126,7 @@ export default function Home({
               вашій роботі
             </p>
             <Search />
-            <div className="hidden md:grid md:grid-cols-7 justify-items-start">
+            <div className="hidden md:grid md:grid-cols-6 justify-items-start">
               <Filters filtersData={filtersData} />
             </div>
             <div className="collapse bg-base-200 md:hidden mt-10">

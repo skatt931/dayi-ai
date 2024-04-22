@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
 
@@ -5,13 +7,17 @@ const LikesCounter = ({
   likesNumber,
   toolId,
 }: {
-  likesNumber: number;
+  likesNumber?: number;
   toolId?: number;
 }) => {
   const [checked, setChecked] = useState<boolean>(
     !!localStorage.getItem(`toolID: ${toolId}`),
   );
-  const handleClick = () => {
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
     if (localStorage.getItem(`toolID: ${toolId}`)) {
       setChecked(false);
       localStorage.removeItem(`toolID: ${toolId}`);
@@ -26,13 +32,19 @@ const LikesCounter = ({
       <input
         type="radio"
         name="rating-3"
-        onClick={handleClick}
+        onClick={(event) => handleClick(event)}
+        aria-label="вподобати"
+        role="radio"
         className={cn(
           'mask mask-heart bg-red-300 hover:bg-red-400',
           `${checked ? 'bg-red-400' : 'bg-red-300'} w-5`,
         )}
       />
-      <span className="ml-1">{checked ? likesNumber + 1 : likesNumber}</span>
+      <span className="ml-1">
+        {checked && typeof likesNumber === 'number'
+          ? likesNumber + 1
+          : likesNumber}
+      </span>
     </div>
   );
 };

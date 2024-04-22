@@ -15,7 +15,7 @@
   {
     "id": 2,
     "createdAt": "",
-    "tags": [],
+    "tags": ["Other"],
     "specialTags": [],
     "title": "Gemini",
     "shortDescription": "Google застосунок ШІ для генерації контенту",
@@ -28,7 +28,7 @@
   {
     "id": 3,
     "createdAt": "",
-    "tags": [],
+    "tags": ["AI Detection"],
     "specialTags": [],
     "title": "Suno ai",
     "shortDescription": "Google застосунок ШІ для генерації контенту i ще трохи дового тексту який би не вміщався у контент і ще трошки довше",
@@ -41,7 +41,7 @@
   {
     "id": 4,
     "createdAt": "",
-    "tags": [],
+    "tags": ["Other"],
     "specialTags": [],
     "title": "Bacardi",
     "shortDescription": "Google застосунок ШІ для генерації контенту",
@@ -54,8 +54,8 @@
   {
     "id": 5,
     "createdAt": "",
-    "tags": [],
-    "specialTags": [],
+    "tags": ["Voice Synthesis"],
+    "specialTags": ["Вибір Dayi AI"],
     "title": "X tripoli",
     "shortDescription": "Google застосунок ШІ для генерації контенту",
     "completeDescription": "Google застосунок ШІ для генерації контенту",

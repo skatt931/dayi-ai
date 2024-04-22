@@ -1,32 +1,34 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 const Search = () => {
-  const router = useRouter();
+  const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
+  const handleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set('search', term);
+    } else {
+      params.delete('search');
+    }
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }, 300);
 
-      return params.toString();
-    },
-    [searchParams],
-  );
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
-
-    router.push(pathname + '?' + createQueryString('sort', e.target.value));
-  };
+  function handleSortChange(sortParam: string) {
+    const params = new URLSearchParams(searchParams);
+    if (sortParam) {
+      params.set('sort', sortParam);
+    } else {
+      params.delete('sort');
+    }
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }
 
   return (
     <div className="join w-full max-w-full flex">
@@ -35,14 +37,21 @@ const Search = () => {
           <input
             className="input input-bordered w-full join-item"
             placeholder="Знайди свій інструмент AI"
+            aria-label="Знайди свій інструмент AI"
+            onChange={(e) => {
+              handleSearch(e.target.value);
+            }}
+            defaultValue={searchParams.get('search')?.toString()}
           />
         </div>
       </div>
       <select
         className={cn('select select-bordered join-item', 'basis-1/3 w-1/3')}
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => handleSortChange(e.target.value)}
+        defaultValue={searchParams.get('sort')?.toString() || 'sort'}
+        aria-label="Сортувати інструменти AI"
       >
-        <option disabled selected>
+        <option value="sort" disabled>
           Сортувати
         </option>
         <option value="new">Нові</option>

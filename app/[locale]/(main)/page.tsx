@@ -5,63 +5,88 @@ import Filters from '@/components/ui/filters';
 import Search from '@/components/ui/search';
 import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
-import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import data from '../../../mocks/mocked-ai-tools.json';
+
+export type TagsData = {
+  id: number;
+  tag: string;
+  name: string;
+};
 
 const filtersData = [
   {
     id: 1,
+    tag: 'ai-detection',
     name: 'AI Detection',
   },
   {
     id: 2,
+    tag: 'image-processing',
     name: 'Image Processing',
   },
   {
     id: 3,
+    tag: 'natural-language-processing',
     name: 'Natural Language Processing',
   },
   {
     id: 4,
+    tag: 'speech-recognition',
     name: 'Speech Recognition',
   },
   {
     id: 5,
+    tag: 'text-recognition',
     name: 'Text Recognition',
   },
   {
     id: 6,
+    tag: 'video-processing',
     name: 'Video Processing',
   },
   {
     id: 7,
+    tag: 'voice-recognition',
     name: 'Voice Recognition',
   },
   {
     id: 8,
+    tag: 'voice-synthesis',
     name: 'Voice Synthesis',
   },
   {
     id: 9,
+    tag: 'other',
     name: 'Other',
   },
   {
     id: 10,
+    tag: 'all',
     name: 'All',
   },
   {
     id: 11,
+    tag: 'ai-detection',
     name: 'AI Detection',
   },
 ];
-export const dynamic = 'force-dynamic';
-export default function Home() {
+
+export default function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    search?: string;
+    sort?: string;
+  };
+}) {
   // const t = useTranslations(); // TODO: add translations
   const theme = useTheme();
 
-  const searchParams = useSearchParams();
-  const sortParam = searchParams.get('sort');
+  const searchQuery = searchParams?.search || '';
+  const sortParam = searchParams?.sort || 'new';
+  console.log('sortParam: ', sortParam);
+
   const [aiTools, setAiTools] = useState(data);
 
   useEffect(() => {
@@ -70,17 +95,23 @@ export default function Home() {
       setAiTools(data.sort((a, b) => a.id - b.id));
     } else if (sortParam === 'popular') {
       setAiTools(data.sort((a, b) => b.likes - a.likes));
-    } else if (sortParam === 'az') {
-      setAiTools(data.sort((a, b) => a.title.localeCompare(b.title)));
-    } else if (sortParam === 'za') {
-      setAiTools(data.sort((a, b) => b.title.localeCompare(a.title)));
     }
-    // else if (sortParam === 'new-old') {
-    //   setAiTools(data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)));
-    // } else if (sortParam === 'old-new') {
-    //   setAiTools(data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+    // else if (sortParam === 'az') {
+    //   setAiTools(data.sort((a, b) => a.title.localeCompare(b.title)));
+    // } else if (sortParam === 'za') {
+    //   setAiTools(data.sort((a, b) => b.title.localeCompare(a.title)));
     // }
-  }, [sortParam]);
+    // else if (sortParam === 'new-old') {
+    //   setAiTools(
+    //     data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)),
+    //   );
+    // } else if (sortParam === 'old-new') {
+    //   setAiTools(
+    //     data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+    //   );
+    // }
+    console.log('aiTools: ', aiTools);
+  }, [sortParam, aiTools]);
 
   return (
     <div data-theme={theme.theme} className="pb-20">
@@ -96,26 +127,25 @@ export default function Home() {
             </p>
             <Search />
             <div className="hidden md:grid md:grid-cols-7 justify-items-start">
-              {filtersData.map((filter) => (
-                <Filters key={filter.id} title={filter.name} />
-              ))}
+              <Filters filtersData={filtersData} />
             </div>
             <div className="collapse bg-base-200 md:hidden mt-10">
-              <input type="checkbox" />
+              <input type="checkbox" aria-label="фільтри" />
               <div className="collapse-title text-xl font-medium">Фільтри</div>
               <div className="collapse-content grid grid-cols-2">
-                {filtersData.map((filter) => (
-                  <Filters key={filter.id} title={filter.name} />
-                ))}
+                <Filters filtersData={filtersData} />
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div className="container mx-auto py-5">
+        <p className="font-bold text-center md:text-left">
+          Знайдено {data.length} з {aiTools.length} сайтів
+        </p>
+      </div>
       <div className="grid gap-10 px-10 lg:px-0 lg:grid-cols-2 container mx-auto place-content-between">
-        {aiTools.map((item) => (
-          <Card key={item.id} {...item} />
-        ))}
+        <Card aiTools={aiTools} />
       </div>
     </div>
   );

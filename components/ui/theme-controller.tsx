@@ -9,9 +9,11 @@ const ThemeController = () => {
   return (
     <label className="swap swap-rotate">
       {/* this hidden checkbox controls the state */}
+      <span className="hidden">Тема {theme}</span>
       <input
         type="checkbox"
         className="theme-controller"
+        aria-label="Змінити тему"
         checked={theme === 'dark'}
         onChange={() => {
           setTheme(theme === 'emerald' ? 'dark' : 'emerald');

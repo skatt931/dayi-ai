@@ -31,11 +31,11 @@ const Search = () => {
   }
 
   return (
-    <div className="join w-full max-w-full flex">
-      <div className="basis-2/3 w-2/3">
+    <div className="join flex w-full max-w-full">
+      <div className="w-2/3 basis-2/3">
         <div>
           <input
-            className="input input-bordered w-full join-item"
+            className="input join-item input-bordered w-full"
             placeholder="Знайди свій інструмент AI"
             aria-label="Знайди свій інструмент AI"
             onChange={(e) => {
@@ -46,7 +46,7 @@ const Search = () => {
         </div>
       </div>
       <select
-        className={cn('select select-bordered join-item', 'basis-1/3 w-1/3')}
+        className={cn('join-item select select-bordered', 'w-1/3 basis-1/3')}
         onChange={(e) => handleSortChange(e.target.value)}
         defaultValue={searchParams.get('sort')?.toString() || 'sort'}
         aria-label="Сортувати інструменти AI"

@@ -42,8 +42,8 @@ const Card = ({ aiTools }: { aiTools: CardProps[] }) => {
           <Link href={`/uk/${title}`} key={id}>
             <div
               className={cn(
-                'card w-full bg-base-100 shadow-xl card-side card-compact',
-                'm-auto lg:min-h-48 lg:min-w-96 h-48 max-w-80 lg:max-w-none  lg:p-0 md:hover:shadow-2xl hover:shadow-sm from-secondary/10 to-primary-dark bg-gradient-to-r',
+                'card card-side card-compact w-full bg-base-100 shadow-xl',
+                'to-primary-dark m-auto h-48 max-w-80 bg-gradient-to-r from-secondary/10  hover:shadow-sm md:hover:shadow-2xl lg:min-h-48 lg:min-w-96 lg:max-w-none lg:p-0',
               )}
             >
               <figure className="w-2/6 lg:w-5/12">
@@ -51,7 +51,7 @@ const Card = ({ aiTools }: { aiTools: CardProps[] }) => {
                   src={imageUrl}
                   width={384}
                   height={384}
-                  className="object-cover w-full h-full"
+                  className="h-full w-full object-cover"
                   alt="Shoes"
                 />
               </figure>
@@ -62,14 +62,14 @@ const Card = ({ aiTools }: { aiTools: CardProps[] }) => {
                   target="_blank"
                   className={cn(
                     'card-title',
-                    'text-base lg:text:l flex gap-2 group',
+                    'lg:text:l group flex gap-2 text-base',
                   )}
                   onClick={(e) => {
                     stopPropagation(e);
                   }}
                 >
                   <h2>{title}</h2>{' '}
-                  <ExternalLink className="w-4 group-hover:-translate-y-1 transition-all" />
+                  <ExternalLink className="w-4 transition-all group-hover:-translate-y-1" />
                 </a>
                 {specialTags &&
                   specialTags.map((tag) => (
@@ -83,7 +83,7 @@ const Card = ({ aiTools }: { aiTools: CardProps[] }) => {
 
                 <p
                   className={cn(
-                    'text-sm h-10 overflow-ellipsis overflow-hidden',
+                    'h-10 overflow-hidden overflow-ellipsis text-sm',
                     'text-xs',
                   )}
                 >

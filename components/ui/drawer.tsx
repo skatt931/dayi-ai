@@ -19,7 +19,7 @@ const Drawer = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <ul className="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
           {/* Sidebar content here */}
           {navigation.map((item) => (
             <li key={item.title}>

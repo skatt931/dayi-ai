@@ -6,15 +6,15 @@ import React from 'react';
 
 const Tool = () => {
   return (
-    <div className="pb-20 from-secondary/10 to-primary-dark bg-gradient-to-r">
+    <div className="to-primary-dark bg-gradient-to-r from-secondary/10 pb-20">
       <div
         className={cn(
-          'hero h-auto bg-current-200 py-10 w-full max-w-full overflow-hidden container',
+          'bg-current-200 container hero h-auto w-full max-w-full overflow-hidden py-10',
         )}
       >
         <div className={cn('hero-content text-center', 'w-full lg:px-0')}>
-          <div className="max-w-full w-full grid md:grid-cols-2 gap-20">
-            <div className="justify-self-center place-self-center">
+          <div className="grid w-full max-w-full gap-20 md:grid-cols-2">
+            <div className="place-self-center justify-self-center">
               <Image
                 src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
                 width={384}
@@ -24,9 +24,9 @@ const Tool = () => {
               />
             </div>
             <div className="text-left">
-              <h1 className="text-2xl lg:text-3xl font-bold">Chat GPT</h1>
+              <h1 className="text-2xl font-bold lg:text-3xl">Chat GPT</h1>
               <p className="text-gray-500">Generative ai</p>
-              <p className="lg:py-6 text-sm lg:text-base">
+              <p className="text-sm lg:py-6 lg:text-base">
                 HitPaw Edimakor (Video Editor) is an AI-powered video editing
                 software designed to cater to both amateur and professional
                 editors. It simplifies the editing process with features like
@@ -70,8 +70,8 @@ const Tool = () => {
         </div>
       </div>
       <div className="container mx-auto py-5">
-        <div className="grid md:grid-cols-2 gap-20">
-          <div className="bg-zinc-400/30 rounded-md p-5">
+        <div className="grid gap-20 md:grid-cols-2">
+          <div className="rounded-md bg-zinc-400/30 p-5">
             <div className="flex justify-center gap-5 pb-10">
               <ThumbsUp className="text-green-600" />
               <span>Переваги</span>
@@ -83,8 +83,8 @@ const Tool = () => {
               </ul>
             </div>
           </div>
-          <div className="bg-zinc-400/30 rounded-md p-5">
-            <div className="flex justify-center gap-5 text-center pb-10">
+          <div className="rounded-md bg-zinc-400/30 p-5">
+            <div className="flex justify-center gap-5 pb-10 text-center">
               <ThumbsDown className="text-red-600" />
               <span>Недоліки</span>
             </div>

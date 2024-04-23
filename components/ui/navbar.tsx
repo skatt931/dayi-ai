@@ -12,7 +12,7 @@ const Navbar = () => {
     <div
       className={cn(
         'bg-base-100',
-        'sticky top-0 z-10 lg:relative border-b border-base-300/30 text-base-content',
+        'sticky top-0 z-10 border-b border-base-300/30 text-base-content lg:relative',
       )}
     >
       <div className={cn('navbar bg-base-100', 'container mx-auto')}>

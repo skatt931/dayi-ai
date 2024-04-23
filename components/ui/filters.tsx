@@ -35,13 +35,13 @@ const Filters = ({ filtersData }: { filtersData: TagsData[] }) => {
       {filtersData.map((filter) => (
         <div
           key={filter.id}
-          className={cn('form-control mt-5 mr-5 lg:mt-10')}
+          className={cn('form-control mr-5 mt-5 lg:mt-10')}
           role="list"
         >
           <label
             className={
               (cn('label cursor-pointer'),
-              'justify-start space-x-3 flex items-center')
+              'flex items-center justify-start space-x-3')
             }
           >
             <input

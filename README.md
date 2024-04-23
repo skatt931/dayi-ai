@@ -8,19 +8,18 @@ Dai [ ai ] is a collection of ai tools for different purpossess. It gives possib
 
 **Server:** Next.js
 
-
 ## Getting Started
 
 First, run the development server:
 
 ```bash
   cd dai-ai
-  
+
   bun install
 
   bun dev
 ```
-    
+
 ## Features
 
 - Light/dark mode toggle
@@ -28,12 +27,9 @@ First, run the development server:
 - AI tools filter/sort
 - Blog posts
 
-
-
 ## Demo
 
 Insert gif or link to demo
-
 
 ## Badges
 
@@ -45,8 +41,8 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 
 ## Color Reference
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
+| Color         | Hex                                                              |
+| ------------- | ---------------------------------------------------------------- |
 | Example Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
 | Example Color | ![#f8f8f8](https://via.placeholder.com/10/f8f8f8?text=+) #f8f8f8 |
 | Example Color | ![#00b48a](https://via.placeholder.com/10/00b48a?text=+) #00b48a |
@@ -61,7 +57,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Authors
 
 - [@skatt931](https://www.github.com/skat931)
-
 
 ## License
 

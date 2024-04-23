@@ -47,11 +47,9 @@ export default function RootLayout({
       <body className={cn(inter.className, 'relative')}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>
-            <div data-theme>
-              <Navbar />
-              {children}
-              <Footer />
-            </div>
+            <Navbar />
+            <div data-theme>{children}</div>
+            <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

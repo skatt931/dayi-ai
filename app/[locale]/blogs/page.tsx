@@ -1,4 +1,4 @@
-import { getBlogs } from '@/lib/posts';
+import { getBlogs } from '@/utils/posts';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 

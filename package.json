@@ -1,6 +1,11 @@
 {
   "name": "dai-ai",
   "version": "0.1.0",
+  "description": "Dai AI is a site for searching and finding the best AI tools and resources. As well as it gives posibility to create your own blogs",
+  "author": {
+    "name": "Ihor Kurnytskyi"
+  },
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",

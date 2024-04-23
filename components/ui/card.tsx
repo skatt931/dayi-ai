@@ -43,7 +43,7 @@ const Card = ({ aiTools }: { aiTools: CardProps[] }) => {
             <div
               className={cn(
                 'card w-full bg-base-100 shadow-xl card-side card-compact',
-                'm-auto lg:min-h-48 lg:min-w-96 h-48 max-w-80 lg:max-w-none lg:p-0 md:hover:shadow-2xl hover:shadow-sm',
+                'm-auto lg:min-h-48 lg:min-w-96 h-48 max-w-80 lg:max-w-none  lg:p-0 md:hover:shadow-2xl hover:shadow-sm from-secondary/10 to-primary-dark bg-gradient-to-r',
               )}
             >
               <figure className="w-2/6 lg:w-5/12">

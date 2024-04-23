@@ -1,4 +1,4 @@
-import { getBlogBySlug } from '@/lib/posts';
+import { getBlogBySlug } from '@/utils/posts';
 
 export default async function Blogs({
   params,

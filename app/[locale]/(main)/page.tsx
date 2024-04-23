@@ -81,7 +81,7 @@ export default function Home({
   };
 }) {
   // const t = useTranslations(); // TODO: add translations
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const searchQuery = searchParams?.search || '';
   const sortParam = searchParams?.sort || 'new';
@@ -114,16 +114,21 @@ export default function Home({
   }, [sortParam, aiTools]);
 
   return (
-    <div data-theme={theme.theme} className="pb-20">
-      <div className="hero h-auto bg-base-100 pt-5 w-full max-w-full overflow-hidden container mb-10">
+    <div className="pb-20">
+      <div
+        className={cn(
+          'hero h-auto bg-neutral-content py-10 w-full max-w-full overflow-hidden container',
+          `${theme === 'dim' ? 'bg-base-200' : 'bg-neutral-content'}`,
+        )}
+      >
         <div className={cn('hero-content text-center', 'w-full lg:px-0')}>
           <div className="max-w-full w-full">
-            <h1 className="text-2xl lg:text-3xl font-bold mt-10 mb-5">
+            <h1 className="text-2xl lg:text-3xl font-bold my-5">
               Відкрий свою суперсилу з DayiAI знайшовши найкращі інструменти AI
             </h1>
             <p className="lg:py-6 text-sm lg:text-base mb-10">
-              Найкращий сервіс для пошуку AI інструментів, які допоможуть вам у
-              вашій роботі
+              Оптимізуйте свій робочий процес за допомогою нашого списку
+              інструментів штучного інтелекту - знайдіть своє ідеальне рішення!
             </p>
             <Search />
             <div className="hidden md:grid md:grid-cols-6 justify-items-start">
@@ -139,9 +144,9 @@ export default function Home({
           </div>
         </div>
       </div>
-      <div className="container mx-auto py-5">
+      <div className="container mx-auto py-5 ">
         <p className="font-bold text-center md:text-left">
-          Знайдено {data.length} з {aiTools.length} сайтів
+          Знайдено {data.length} з {aiTools.length} інструментів
         </p>
       </div>
       <div className="grid gap-10 px-10 lg:px-0 lg:grid-cols-2 container mx-auto place-content-between">

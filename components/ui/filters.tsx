@@ -5,7 +5,65 @@ import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-const Filters = ({ filtersData }: { filtersData: TagsData[] }) => {
+const filtersData = [
+  {
+    id: 1,
+    tag: 'AI_DETECTION',
+    name: 'AI Detection',
+  },
+  {
+    id: 2,
+    tag: 'AI_GENERATION',
+    name: 'Image Processing',
+  },
+  {
+    id: 3,
+    tag: 'AI_OPTIMIZATION',
+    name: 'Natural Language',
+  },
+  {
+    id: 4,
+    tag: 'AI_TRAINING',
+    name: 'Speech Recognition',
+  },
+  {
+    id: 5,
+    tag: 'AI_VISUALIZATION',
+    name: 'Text Recognition',
+  },
+  {
+    id: 6,
+    tag: 'AI_OTHER',
+    name: 'Video Processing',
+  },
+  {
+    id: 7,
+    tag: 'voice-recognition',
+    name: 'Voice Recognition',
+  },
+  {
+    id: 8,
+    tag: 'voice-synthesis',
+    name: 'Voice Synthesis',
+  },
+  {
+    id: 9,
+    tag: 'other',
+    name: 'Other',
+  },
+  {
+    id: 10,
+    tag: 'all',
+    name: 'All',
+  },
+  {
+    id: 11,
+    tag: 'ai-detection',
+    name: 'AI Detection',
+  },
+];
+
+const Filters = () => {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -21,11 +79,11 @@ const Filters = ({ filtersData }: { filtersData: TagsData[] }) => {
   }
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams || '');
     if (tagsArray.length) {
-      params.set('tags', tagsArray.join(','));
+      params.set('categories', tagsArray.join(','));
     } else {
-      params.delete('tags');
+      params.delete('categories');
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   }, [tagsArray]);
@@ -49,7 +107,7 @@ const Filters = ({ filtersData }: { filtersData: TagsData[] }) => {
               // defaultChecked={searchParams.get('filter') === title}
               className="checkbox checkbox-xs"
               arial-label="ai detection"
-              onChange={(e) => handleChange(e.target.checked, filter.name)}
+              onChange={(e) => handleChange(e.target.checked, filter.tag)}
             />
             <div className={cn('label-text', 'cursor-pointer text-sm')}>
               {filter.name}

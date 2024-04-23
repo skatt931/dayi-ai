@@ -1,10 +1,13 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ThemeController = () => {
   const { theme, setTheme } = useTheme();
+  useEffect(() => {
+    setTheme('emerald');
+  }, []);
 
   return (
     <label className="swap swap-rotate">

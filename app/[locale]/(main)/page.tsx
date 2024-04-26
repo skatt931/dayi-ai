@@ -20,6 +20,7 @@ export default function Home({
   searchParams?: {
     search?: string;
     sort?: string;
+    categories?: string;
   };
 }) {
   // const t = useTranslations(); // TODO: add translations
@@ -27,6 +28,7 @@ export default function Home({
 
   const searchQuery = searchParams?.search || '';
   const sortParam = searchParams?.sort || 'new';
+  const filterQuery = searchParams?.categories || '';
 
   return (
     <div className="pb-20">
@@ -46,22 +48,23 @@ export default function Home({
               інструментів штучного інтелекту - знайдіть своє ідеальне рішення!
             </p>
             <Search />
-            <div className="hidden justify-items-start md:grid md:grid-cols-6">
-              <Filters />
-            </div>
-            <div className="collapse mt-10 bg-base-200 md:hidden">
+            {/* TODO: CHeck mobile version */}
+            {/* <section className="hidden justify-items-start md:grid md:grid-cols-6"> */}
+            <Filters />
+            {/* </section> */}
+            <section className="collapse mt-10 bg-base-200 md:hidden">
               <input type="checkbox" aria-label="фільтри" />
               <div className="collapse-title text-xl font-medium">Фільтри</div>
               <div className="collapse-content grid grid-cols-2">
                 <Filters />
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>
-      <div>
+      <section>
         <Suspense
-          key={searchQuery + sortParam}
+          key={searchQuery + sortParam + filterQuery}
           fallback={
             <div className="h-96 w-96">
               {[1, 2, 3, 4, 5, 6].map((id) => (
@@ -70,9 +73,9 @@ export default function Home({
             </div>
           }
         >
-          <Card searchQuery={searchQuery} sortParam={sortParam} />
+          <Card />
         </Suspense>
-      </div>
+      </section>
     </div>
   );
 }

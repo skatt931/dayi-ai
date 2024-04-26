@@ -1,68 +1,52 @@
-import { cn } from '@/lib/utils';
+import { useGetDocuments } from '@/hooks/useGetDocuments';
+import { cn, searchFilterTools, sortTools } from '@/lib/utils';
+import { AiToolData, CATEGORIES } from '@/types';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import LikesCounter from './likes-counter';
 
-type CardProps = {
-  id: number;
-  createdAt: Date;
-  promoted: boolean;
-  pros: string[];
-  cons: string[];
-  categories: string;
-  specialTags: string;
-  title: string;
-  shortDescription: string;
-  completeDescription?: string;
-  imageUrl: string;
-  pricing: string;
-  linkToTool: string;
-  likes: number;
-};
+const Card = () => {
+  const [aiTools, setAiTools] = useState<AiToolData[]>([]);
+  const [filteredTools, setFilteredTools] = useState<AiToolData[]>(aiTools);
+  const { getDoc } = useGetDocuments();
+  const searchParams = useSearchParams();
 
-const Card = ({
-  searchQuery,
-  sortParam,
-}: {
-  searchQuery: string;
-  sortParam: string;
-}) => {
-  const [aiTools, setAiTools] = useState<CardProps[]>([]);
-  const [filteredTools, setFilteredTools] = useState<CardProps[]>(aiTools);
+  const searchQuery = searchParams?.get('search') || '';
+  const sortQuery = searchParams?.get('sort') || '';
+  const filterQuery = searchParams?.get('categories') || '';
+
   useEffect(() => {
-    fetch('/api/getAiTools')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setAiTools(data.aiTools);
-      });
+    getDoc('tools', 0, 100).then((data: unknown) => {
+      setAiTools(data as AiToolData[]);
+    });
   }, []);
 
   useEffect(() => {
-    // TODO: fix sorting
-    if (sortParam === 'new') {
-      setFilteredTools(aiTools.sort((a, b) => a.id - b.id));
-    } else if (sortParam === 'popular') {
-      setFilteredTools(aiTools.sort((a, b) => b.likes - a.likes));
-    } else if (sortParam === 'az') {
-      setFilteredTools(aiTools.sort((a, b) => a.title.localeCompare(b.title)));
-    } else if (sortParam === 'za') {
-      setFilteredTools(aiTools.sort((a, b) => b.title.localeCompare(a.title)));
-    } else if (sortParam === 'new-old') {
-      setAiTools(
-        aiTools.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)),
-      );
-    } else if (sortParam === 'old-new') {
-      setAiTools(
-        aiTools.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+    if (sortQuery) {
+      setFilteredTools(sortTools(sortQuery, aiTools));
+    }
+    // Search based on title, shortDescription, categories, spaceTags
+    if (searchQuery || filterQuery) {
+      // TODO: redo this part in more readable way
+      setFilteredTools(
+        sortTools(
+          sortQuery,
+          searchFilterTools(searchQuery, aiTools).filter((tool) =>
+            filterQuery
+              .split(',')
+              .some((category) => tool.categories.includes(category)),
+          ),
+        ),
       );
     }
-    console.log('aiTools: ', aiTools);
-  }, [sortParam, aiTools]);
+
+    if (!searchQuery && !sortQuery && !filterQuery) {
+      setFilteredTools(aiTools);
+    }
+  }, [sortQuery, searchQuery, filterQuery, aiTools]);
 
   const stopPropagation = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -74,7 +58,7 @@ const Card = ({
     <>
       <div className="container mx-auto py-5 ">
         <p className="text-center font-bold md:text-left">
-          Знайдено {aiTools.length} з {filteredTools.length} інструментів
+          Знайдено {filteredTools.length} з {aiTools.length} інструментів
         </p>
       </div>
       {filteredTools.length === 0 && (
@@ -86,6 +70,7 @@ const Card = ({
       <div className="container mx-auto grid place-content-between gap-10 px-10 lg:grid-cols-2 lg:px-0 transition-all">
         {filteredTools.map(
           ({
+            docID,
             id,
             title,
             shortDescription,
@@ -96,7 +81,7 @@ const Card = ({
             likes,
             linkToTool,
           }) => (
-            <Link href={`/uk/${title}`} key={id}>
+            <Link href={`/uk/${docID}`} key={id}>
               <div
                 className={cn(
                   'card card-side card-compact w-full bg-base-100 shadow-xl',
@@ -128,12 +113,15 @@ const Card = ({
                     <h2>{title}</h2>{' '}
                     <ExternalLink className="w-4 transition-all group-hover:-translate-y-1" />
                   </a>
-                  {specialTags && (
-                    <div className={cn('badge badge-primary', 'text-xs')}>
-                      {specialTags}
-                    </div>
-                  )}
-
+                  {!!specialTags &&
+                    specialTags.map((tag) => (
+                      <div
+                        key={tag}
+                        className={cn('badge badge-primary', 'text-xs')}
+                      >
+                        {tag}
+                      </div>
+                    ))}
                   <p
                     className={cn(
                       'h-10 overflow-hidden overflow-ellipsis text-sm',
@@ -143,7 +131,12 @@ const Card = ({
                     {shortDescription}
                   </p>
                   <div className={(cn('card-actions'), 'flex justify-between')}>
-                    <div className="badge badge-outline">{categories}</div>
+                    {!!categories &&
+                      categories.map((tag) => (
+                        <div key={tag} className="badge badge-outline text-xs">
+                          {CATEGORIES[tag as keyof typeof CATEGORIES]}
+                        </div>
+                      ))}
                     {/* <div className={cn('badge badge-ghost min-h-fit', 'text-xs')}>
                     {pricing}
                   </div> */}

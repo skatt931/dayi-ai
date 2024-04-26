@@ -11,7 +11,7 @@ const Search = () => {
   const searchParams = useSearchParams();
 
   const handleSearch = useDebouncedCallback((term: string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams || '');
     if (term) {
       params.set('search', term);
     } else {
@@ -21,7 +21,7 @@ const Search = () => {
   }, 300);
 
   function handleSortChange(sortParam: string) {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams || '');
     if (sortParam) {
       params.set('sort', sortParam);
     } else {
@@ -31,7 +31,7 @@ const Search = () => {
   }
 
   return (
-    <div className="join flex w-full max-w-full">
+    <section className="join flex w-full max-w-full">
       <div className="w-2/3 basis-2/3">
         <div>
           <input
@@ -41,14 +41,14 @@ const Search = () => {
             onChange={(e) => {
               handleSearch(e.target.value);
             }}
-            defaultValue={searchParams.get('search')?.toString()}
+            defaultValue={searchParams?.get('search')?.toString()}
           />
         </div>
       </div>
       <select
         className={cn('join-item select select-bordered', 'w-1/3 basis-1/3')}
         onChange={(e) => handleSortChange(e.target.value)}
-        defaultValue={searchParams.get('sort')?.toString() || 'sort'}
+        defaultValue={searchParams?.get('sort')?.toString() || 'sort'}
         aria-label="Сортувати інструменти AI"
       >
         <option value="sort" disabled>
@@ -65,7 +65,7 @@ const Search = () => {
         <span className="indicator-item badge badge-secondary">new</span>
         <button className="btn join-item">Search</button>
       </div> */}
-    </div>
+    </section>
   );
 };
 

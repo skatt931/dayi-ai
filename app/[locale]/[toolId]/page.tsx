@@ -1,10 +1,23 @@
+'use client';
+
+import { useGetDocumentById } from '@/hooks/useGetDocuments';
 import { cn } from '@/lib/utils';
+import { type AiToolData } from '@/types';
 import { ExternalLink, ThumbsDown, ThumbsUp } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Tool = () => {
+const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
+  const [aiToolData, setAiToolData] = React.useState<AiToolData | null>(null);
+  const { getDocById } = useGetDocumentById();
+
+  useEffect(() => {
+    getDocById('tools', toolId).then((data: unknown) =>
+      setAiToolData(data as AiToolData),
+    );
+  }, []);
+
   return (
     <div className="to-primary-dark bg-gradient-to-r from-secondary/10 pb-20">
       <div
@@ -16,7 +29,7 @@ const Tool = () => {
           <div className="grid w-full max-w-full gap-20 md:grid-cols-2">
             <div className="place-self-center justify-self-center">
               <Image
-                src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
+                src={aiToolData?.imageUrl}
                 width={384}
                 height={384}
                 className="rounded-lg shadow-lg"
@@ -24,34 +37,32 @@ const Tool = () => {
               />
             </div>
             <div className="text-left">
-              <h1 className="text-2xl font-bold lg:text-3xl">Chat GPT</h1>
-              <p className="text-gray-500">Generative ai</p>
+              <h1 className="text-2xl font-bold lg:text-3xl">
+                {aiToolData?.title}
+              </h1>
+              <p className="text-gray-500">{aiToolData?.categories}</p>
               <p className="text-sm lg:py-6 lg:text-base">
-                HitPaw Edimakor (Video Editor) is an AI-powered video editing
-                software designed to cater to both amateur and professional
-                editors. It simplifies the editing process with features like
-                auto subtitle maker, video cutting, text overlays, video
-                coloring, and speed adjustments, alongside AI-driven tools such
-                as speech-to-text and noise removal. Users can enhance their
-                videos with a plethora of stickers, filters, effects, and audio
-                options, making it suitable for creating content for social
-                media platforms like YouTube and TikTok. People might want to
-                use HitPaw Edimakor for its user-friendly interface, time-saving
-                AI features, and the ability to produce high-quality videos with
-                minimal effort.
+                {aiToolData?.completeDescription ||
+                  aiToolData?.shortDescription}
               </p>
               <div className="grid gap-5">
                 <div className="flex gap-3">
                   <p className="font-bold">Pricing: </p>
-                  <div className="badge badge-primary">Free</div>
+                  <div className="badge badge-primary">
+                    {aiToolData?.pricing}
+                  </div>
                 </div>
-                <div className="flex gap-3">
-                  <p className="font-bold">Tags: </p>
-                  <div className="badge badge-secondary">Made in UA</div>
-                </div>
+                {!!aiToolData?.categories && (
+                  <div className="flex gap-3">
+                    <p className="font-bold">Tags: </p>
+                    <div className="badge badge-secondary">
+                      {aiToolData?.categories}
+                    </div>
+                  </div>
+                )}
                 <div className="grid gap-2">
                   <Link
-                    href="https://openai.com"
+                    href={aiToolData?.linkToTool || '#'}
                     className="btn btn-outline btn-primary"
                   >
                     Visit site
@@ -77,10 +88,7 @@ const Tool = () => {
               <span>Переваги</span>
             </div>
             <div>
-              <ul>
-                <li>Повільний</li>
-                <li>Не піключений до інтернету</li>
-              </ul>
+              <ul>{aiToolData?.pros.map((pro) => <li key={pro}>{pro}</li>)}</ul>
             </div>
           </div>
           <div className="rounded-md bg-zinc-400/30 p-5">
@@ -89,10 +97,7 @@ const Tool = () => {
               <span>Недоліки</span>
             </div>
             <div>
-              <ul>
-                <li>Повільний</li>
-                <li>Не піключений до інтернету</li>
-              </ul>
+              <ul>{aiToolData?.cons.map((con) => <li key={con}>{con}</li>)}</ul>
             </div>
           </div>
         </div>

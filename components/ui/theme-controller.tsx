@@ -5,9 +5,6 @@ import React, { useEffect } from 'react';
 
 const ThemeController = () => {
   const { theme, setTheme } = useTheme();
-  useEffect(() => {
-    setTheme('emerald');
-  }, []);
 
   return (
     <label className="swap swap-rotate">

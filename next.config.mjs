@@ -8,7 +8,7 @@ const nextConfig = {
   reactStrictMode: true,
   i18n: null,
   images: {
-    domains: ['daisyui.com'],
+    domains: ['daisyui.com', 'findmyaitool.com'],
   },
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],

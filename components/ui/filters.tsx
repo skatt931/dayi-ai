@@ -4,7 +4,7 @@ import { updateFilterCategories } from '@/actions';
 import { cn } from '@/lib/utils';
 import { CATEGORIES } from '@/types';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const Filters = () => {
   const categoryValues = Object.values(CATEGORIES);
@@ -52,14 +52,14 @@ const Filters = () => {
       {categoryValues.map((filter) => (
         <div
           key={filter}
-          className={cn('form-control mr-5 mt-5 lg:mt-10')}
+          className={cn('form-control mr-5 mt-5 lg:mt-5')}
           role="list"
         >
           <label
             key={filter}
             className={
-              (cn('label cursor-pointer mr-5 mt-5 lg:mt-10'),
-              'flex items-center justify-start space-x-3')
+              (cn('label mr-3 mt-3 cursor-pointer'),
+              'flex items-center justify-start space-x-2')
             }
           >
             <input

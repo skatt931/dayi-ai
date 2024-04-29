@@ -25,6 +25,15 @@ export const searchFilterTools = (
   );
 };
 
+export const filterByCategory = (filterQuery: string, tools: AiToolData[]) => {
+  if (!filterQuery) return tools;
+  return tools.filter((tool) =>
+    filterQuery
+      .split(',')
+      .some((category) => tool.categories.includes(category)),
+  );
+};
+
 type SortFunction = (a: AiToolData, b: AiToolData) => number;
 type SortFunctions = { [key: string]: SortFunction };
 

@@ -1,0 +1,149 @@
+---
+title: Тестовий блог з Node.js
+description: Тестовий блог з Node.js щоб перевірити функціноальність
+slug: first-blog
+date: Mar 15, 2024
+author: Ihor Kurnytskyi
+image: https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg
+---
+
+**tl;dr**
+
+- Node streams are great, except for all the ways in which they're
+  terrible.
+- A new Stream implementation is coming in 0.10, that has gotten the
+  nickname "streams2".
+- Readable streams have a `read()` method that returns a buffer or
+  null. (More documentation included below.)
+- `'data'` events, `pause()`, and `resume()` will still work as before
+  (except that they'll actually work how you'd expect).
+- Old programs will **almost always** work without modification, but
+  streams start out in a paused state, and need to be read from to be
+  consumed.
+- **WARNING**: If you never add a `'data'` event handler, or call
+  `resume()`, then it'll sit in a paused state forever and never
+  emit `'end'`.
+
+---
+
+Throughout the life of Node, we've been gradually iterating on the
+ideal event-based API for handling data. Over time, this developed
+into the "Stream" interface that you see throughout Node's core
+modules and many of the modules in npm.
+
+Consistent interfaces increase the portability and reliability of our
+programs and libraries. Overall, the move from domain-specific events
+and methods towards a unified stream interface was a huge win.
+However, there are still several problems with Node's streams as of
+v0.8. In a nutshell:
+
+1. The `pause()` method doesn't pause. It is advisory-only. In
+   Node's implementation, this makes things much simpler, but it's
+   confusing to users, and doesn't do what it looks like it does.
+2. `'data'` events come right away (whether you're ready or not).
+   This makes it unreasonably difficult to do common tasks like load a
+   user's session before deciding how to handle their request.
+3. There is no way to consume a specific number of bytes, and then
+   leave the rest for some other part of the program to deal with.
+4. It's unreasonably difficult to implement streams and get all the
+   intricacies of pause, resume, write-buffering, and data events
+   correct. The lack of shared classes mean that we all have to solve
+   the same problems repeatedly, making similar mistakes and similar
+   bugs.
+
+Common simple tasks should be easy, or we aren't doing our job.
+People often say that Node is better than most other platforms at this
+stuff, but in my opinion, that is less of a compliment and more of an
+indictment of the current state of software. Being better than the
+next guy isn't enough; we have to be the best imaginable. While they
+were a big step in the right direction, the Streams in Node up until
+now leave a lot wanting.
+
+So, just fix it, right?
+
+Well, we are sitting on the results of several years of explosive
+growth in the Node community, so any changes have to be made very
+carefully. If we break all the Node programs in 0.10, then no one
+will ever want to upgrade to 0.10, and it's all pointless. We had
+this conversation around 0.4, then again around 0.6, then again around
+0.8. Every time, the conclusion has been "Too much work, too hard to
+make backwards-compatible", and we always had more pressing problems
+to solve.
+
+In 0.10, we cannot put it off any longer. We've bitten the bullet and
+are making a significant change to the Stream implementation. You may
+have seen conversations on twitter or IRC or the mailing list about
+"streams2". I also gave [a talk in
+November](https://dl.dropbox.com/u/3685/presentations/streams2/streams2-ko.pdf)
+about this subject. A lot of node module authors have been involved
+with the development of streams2 (and of course the node core team).
+
+## streams2
+
+The feature is described pretty thoroughly in the documentation, so
+I'm including it below. Please read it, especially the section on
+"compatibility". There's a caveat there that is unfortunately
+unavoidable, but hopefully enough of an edge case that it's easily
+worked around.
+
+The first preview release with this change will be 0.9.4. I highly
+recommend trying this release and providing feedback before it lands
+in a stable version.
+
+As of writing this post, there are some known performance regressions,
+especially in the http module. We are fanatical about maintaining
+performance in Node.js, so of course this will have to be fixed before
+the v0.10 stable release. (Watch for a future blog post on the tools
+and techniques that have been useful in tracking down these issues.)
+
+There may be minor changes as necessary to fix bugs and improve
+performance, but the API at this point should be considered feature
+complete. It correctly does all the things we need it to do, it just
+doesn't do them quite well enough yet. As always, be wary of running
+unstable releases in production, of course, but I encourage you to try
+it out and see what you think. Especially, if you have tests that you
+can run on your modules and libraries, that would be extremely useful
+feedback.
+
+---
+
+# Stream
+
+> Stability: 2 - Unstable
+
+A stream is an abstract interface implemented by various objects in
+Node. For example a request to an HTTP server is a stream, as is
+stdout. Streams are readable, writable, or both. All streams are
+instances of [EventEmitter][]
+
+You can load the Stream base classes by doing `require('stream')`.
+There are base classes provided for Readable streams, Writable
+streams, Duplex streams, and Transform streams.
+
+## Compatibility
+
+In earlier versions of Node, the Readable stream interface was
+simpler, but also less powerful and less useful.
+
+- Rather than waiting for you to call the `read()` method, `'data'`
+  events would start emitting immediately. If you needed to do some
+  I/O to decide how to handle data, then you had to store the chunks
+  in some kind of buffer so that they would not be lost.
+- The `pause()` method was advisory, rather than guaranteed. This
+  meant that you still had to be prepared to receive `'data'` events
+  even when the stream was in a paused state.
+
+In Node v0.10, the Readable class described below was added. For
+backwards compatibility with older Node programs, Readable streams
+switch into "old mode" when a `'data'` event handler is added, or when
+the `pause()` or `resume()` methods are called. The effect is that,
+even if you are not using the new `read()` method and `'readable'`
+event, you no longer have to worry about losing `'data'` chunks.
+
+Most programs will continue to function normally. However, this
+introduces an edge case in the following conditions:
+
+```typescript
+let r: string = new Readable();
+r.push('your text here');
+```

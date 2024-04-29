@@ -31,12 +31,9 @@ export default async function Blogs() {
       </h1>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {blogs.map((blog) => {
+          const slug = blog.slug;
           return (
-            <Link
-              key={blog.slug}
-              href={`blog/${blog.slug}`}
-              className="cursor-default"
-            >
+            <Link key={slug} href={`blog/${slug}`} className="cursor-default">
               <div className="mx-auto w-80">
                 <BlogCard
                   title={

@@ -1,9 +1,9 @@
 'use client';
 
-import Card from '@/components/ui/card';
-import Filters from '@/components/ui/filters';
-import Search from '@/components/ui/search';
-import Skeleton from '@/components/ui/skeleton';
+import Cards from '@/components/ui/Card/Cards';
+import Filters from '@/components/ui/Filters';
+import Search from '@/components/ui/Search';
+import Skeleton from '@/components/ui/Skeleton';
 import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import React, { Suspense } from 'react';
@@ -21,6 +21,7 @@ export default function Home({
     search?: string;
     sort?: string;
     categories?: string;
+    page?: string;
   };
 }) {
   // const t = useTranslations(); // TODO: add translations
@@ -29,6 +30,7 @@ export default function Home({
   const searchQuery = searchParams?.search || '';
   const sortParam = searchParams?.sort || 'new';
   const filterQuery = searchParams?.categories || '';
+  const pageQuery = searchParams?.page || '1';
 
   return (
     <div className="pb-20">
@@ -64,7 +66,7 @@ export default function Home({
       </div>
       <section>
         <Suspense
-          key={searchQuery + sortParam + filterQuery}
+          key={searchQuery + sortParam + filterQuery + pageQuery}
           fallback={
             <div className="h-96 w-96">
               {[1, 2, 3, 4, 5, 6].map((id) => (
@@ -73,7 +75,7 @@ export default function Home({
             </div>
           }
         >
-          <Card />
+          <Cards />
         </Suspense>
       </section>
     </div>

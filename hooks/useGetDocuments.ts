@@ -18,7 +18,7 @@ export const useGetDocuments = () => {
       collectionRef,
       orderBy('id', 'asc'),
       startAt(limitFrom || 0),
-      endAt(limitTo || 2),
+      endAt(limitTo || 1000),
     );
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map((doc) => ({

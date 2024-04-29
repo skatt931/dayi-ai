@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Footer from '@/components/ui/footer';
-import Navbar from '@/components/ui/navbar';
+import Footer from '@/components/ui/Footer';
+import Navbar from '@/components/ui/Navbar';
+import { AiToolProvider } from '@/context/aiToolContext';
 import { cn } from '@/lib/utils';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { ThemeProvider } from 'next-themes';
@@ -47,9 +48,11 @@ export default function RootLayout({
       <body className={cn(inter.className, 'relative')}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>
-            <Navbar />
-            <div data-theme>{children}</div>
-            <Footer />
+            <AiToolProvider>
+              <Navbar />
+              <div data-theme>{children}</div>
+              <Footer />
+            </AiToolProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

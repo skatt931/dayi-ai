@@ -1,11 +1,9 @@
-'use client';
-
+import Drawer from '@/components/ui/Drawer';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import React from 'react';
 import navigation from '../../nav-links.json';
-import Drawer from './drawer';
-import ThemeController from './theme-controller';
+import ThemeController from './ThemeController';
 
 const Navbar = () => {
   return (

@@ -1,15 +1,11 @@
 'use client';
 
 import { updateFilterCategories } from '@/actions';
-import { cn } from '@/lib/utils';
-import { CATEGORIES } from '@/types';
+import { categoryKeys, categoryValues, cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
 const Filters = () => {
-  const categoryValues = Object.values(CATEGORIES);
-  const categoryKeys = Object.keys(CATEGORIES);
-
   const formRef = React.useRef<HTMLFormElement>(null);
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -17,7 +13,7 @@ const Filters = () => {
 
   function handleChange(isChecked: boolean, title: string) {
     const params = new URLSearchParams(searchParams || '');
-
+    params.set('page', '1');
     if (isChecked) {
       if (params.has('categories')) {
         const categories = params.getAll('categories');
@@ -79,7 +75,7 @@ const Filters = () => {
               }
             />
 
-            <div className={cn('label-text', 'cursor-pointer text-sm')}>
+            <div className={cn('label-text', 'cursor-pointer text-xs')}>
               {filter.replace(/_/g, ' ')}
             </div>
           </label>

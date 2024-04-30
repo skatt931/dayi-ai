@@ -1,5 +1,6 @@
 import { DOTS, PAGE_SIZE } from '@/constants';
 import { usePagination } from '@/hooks/usePagination';
+import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
@@ -51,7 +52,10 @@ const Pagination: React.FC<PaginationProps> = ({ totalCount, currentPage }) => {
           return (
             <button
               key={pageNumber}
-              className="btn join-item"
+              className={cn(
+                'btn join-item',
+                `${currentPage === pageNumber ? 'btn-active' : ''}`,
+              )}
               onClick={() => handlePageClick(pageNumber)}
             >
               {pageNumber}

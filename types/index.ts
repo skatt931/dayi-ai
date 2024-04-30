@@ -48,7 +48,7 @@ export enum CATEGORIES {
   // Other
   Fun = 'Розваги',
   Lifestyle = 'Стиль Життя',
-  Search = 'Пошук',
+  Search_Engine = 'Пошуковик',
 }
 
 export enum PRICING {

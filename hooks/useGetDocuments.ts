@@ -6,9 +6,11 @@ import {
   endAt,
   getDoc,
   getDocs,
+  limit,
   orderBy,
   query,
   startAt,
+  where,
 } from 'firebase/firestore';
 
 export const useGetDocuments = () => {
@@ -19,6 +21,27 @@ export const useGetDocuments = () => {
       orderBy('id', 'asc'),
       startAt(limitFrom || 0),
       endAt(limitTo || 1000),
+    );
+    const querySnapshot = await getDocs(q);
+    const data = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      docID: doc.id,
+    }));
+    return data as unknown | AiToolData[];
+  };
+
+  return { getDoc };
+};
+
+export const useGetDocumentsFromCategory = () => {
+  const getDoc = async (path: string, toolCategory: string | undefined) => {
+    console.log('toolCategory', toolCategory);
+
+    const collectionRef = collection(firebaseDB, path);
+    const q = await query(
+      collectionRef,
+      where('categories', 'array-contains', toolCategory || 'Music'),
+      limit(4),
     );
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map((doc) => ({

@@ -36,17 +36,18 @@ export default function Home({
     <div className="pb-20">
       <div
         className={cn(
-          'container hero h-auto w-full max-w-full overflow-hidden bg-neutral-content py-10',
-          `${theme === 'dim' ? 'bg-base-200' : 'bg-neutral-content'}`,
+          'container hero',
+          'h-auto w-full max-w-full overflow-hidden bg-gradient-to-b from-accent/5 to-secondary/10  py-5',
         )}
       >
-        <div className={cn('hero-content text-center', 'w-full lg:px-0')}>
+        <div className={cn('hero-content text-center', 'bg-red w-full')}>
           <div className="w-full max-w-full">
             <h1 className="my-5 text-2xl font-bold lg:text-3xl">
-              Відкрий свою суперсилу з DayiAI знайшовши найкращі інструменти AI
+              <span className="text-">Відкрий свою суперсилу з Дай</span> [{' '}
+              <span className="text-pink-400">AI</span> ]
             </h1>
-            <p className="mb-10 text-sm lg:py-6 lg:text-base">
-              Оптимізуйте свій робочий процес за допомогою нашого списку
+            <p className="mb-10 text-sm lg:text-base">
+              Оптимізуйте свій робочий процес за допомогою нашї колеції
               інструментів штучного інтелекту - знайдіть своє ідеальне рішення!
             </p>
             <Search />

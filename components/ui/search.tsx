@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { useDebouncedCallback } from 'use-debounce';
@@ -9,6 +10,7 @@ const Search = () => {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const t = useTranslations('Hero');
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams || '');
@@ -36,8 +38,8 @@ const Search = () => {
         <div>
           <input
             className="input join-item input-bordered w-full"
-            placeholder="Шукати з понад 500+ інструментів AI"
-            aria-label="Знайди свій інструмент AI"
+            placeholder={t('search.placeholder')}
+            aria-label={t('search.ariaLabel')}
             onChange={(e) => {
               handleSearch(e.target.value);
             }}
@@ -49,22 +51,18 @@ const Search = () => {
         className={cn('join-item select select-bordered', 'w-1/3 basis-1/3')}
         onChange={(e) => handleSortChange(e.target.value)}
         defaultValue={searchParams?.get('sort')?.toString() || 'sort'}
-        aria-label="Сортувати інструменти AI"
+        aria-label={t('sort.ariaLabel')}
       >
         <option value="sort" disabled>
-          Сортувати
+          {t('sort.options.default')}
         </option>
-        <option value="new">Нові</option>
-        <option value="popular">Популярні</option>
-        <option value="az">За назвою (А-Я)</option>
-        <option value="za">За назвою (Я-А)</option>
-        <option value="new-old">За датою додавання (нові-старі)</option>
-        <option value="old-new">За датою додавання (старі-нові)</option>
+        <option value="new">{t('sort.options.new')}</option>
+        <option value="popular">{t('sort.options.popularity')}</option>
+        <option value="az">{t('sort.options.az')}</option>
+        <option value="za">{t('sort.options.za')}</option>
+        <option value="new-old">{t('sort.options.newOld')}</option>
+        <option value="old-new">{t('sort.options.oldNew')}</option>
       </select>
-      {/* <div className="indicator">
-        <span className="indicator-item badge badge-secondary">new</span>
-        <button className="btn join-item">Search</button>
-      </div> */}
     </section>
   );
 };

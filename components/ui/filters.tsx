@@ -1,6 +1,5 @@
 'use client';
 
-import { updateFilterCategories } from '@/actions';
 import { categoryKeys, categoryValues, cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
@@ -42,7 +41,6 @@ const Filters = () => {
   return (
     <form
       ref={formRef}
-      action={updateFilterCategories}
       className="hidden justify-items-start md:grid md:grid-cols-6"
     >
       {categoryValues.map((filter) => (

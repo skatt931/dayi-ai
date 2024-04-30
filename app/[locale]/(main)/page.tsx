@@ -5,7 +5,7 @@ import Filters from '@/components/ui/Filters';
 import Search from '@/components/ui/Search';
 import Skeleton from '@/components/ui/Skeleton';
 import { cn } from '@/lib/utils';
-import { useTheme } from 'next-themes';
+import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
 
 export type TagsData = {
@@ -24,8 +24,7 @@ export default function Home({
     page?: string;
   };
 }) {
-  // const t = useTranslations(); // TODO: add translations
-  const { theme } = useTheme();
+  const t = useTranslations('Hero');
 
   const searchQuery = searchParams?.search || '';
   const sortParam = searchParams?.sort || 'new';
@@ -43,13 +42,16 @@ export default function Home({
         <div className={cn('hero-content text-center', 'bg-red w-full')}>
           <div className="w-full max-w-full">
             <h1 className="my-5 text-2xl font-bold lg:text-3xl">
-              <span className="text-">Відкрий свою суперсилу з Дай</span> [{' '}
-              <span className="text-pink-400">AI</span> ]
+              {/* <span>Відкрий свою суперсилу з Дай</span> [{' '}
+              <span className="text-pink-400">AI</span> ] */}
+              {t.rich('header', {
+                first: (chunks) => <span>{chunks}</span>,
+                second: (chunks) => (
+                  <span className="text-pink-400">{chunks}</span>
+                ),
+              })}
             </h1>
-            <p className="mb-10 text-sm lg:text-base">
-              Оптимізуйте свій робочий процес за допомогою нашї колеції
-              інструментів штучного інтелекту - знайдіть своє ідеальне рішення!
-            </p>
+            <p className="mb-10 text-sm lg:text-base">{t('subheader')}</p>
             <Search />
             {/* TODO: CHeck mobile version */}
             {/* <section className="hidden justify-items-start md:grid md:grid-cols-6"> */}

@@ -2,12 +2,14 @@ import { PAGE_SIZE } from '@/constants';
 import { AiToolContext } from '@/context/aiToolContext';
 import { filterByCategory, searchFilterTools, sortTools } from '@/lib/utils';
 import { AiToolData } from '@/types';
+import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
 import Pagination from '../Pagination';
 import Card from './Card';
 
 const Cards = () => {
+  const t = useTranslations('Card');
   const aiTools = useContext(AiToolContext);
   const [filteredTools, setFilteredTools] = useState<AiToolData[]>(aiTools);
   const [toolsPerPage, setToolsPerPage] = useState<AiToolData[]>(aiTools);
@@ -38,13 +40,13 @@ const Cards = () => {
     <>
       <div className="container mx-auto py-5 ">
         <p className="text-center font-bold md:text-left">
-          Знайдено {filteredTools.length} з {aiTools.length} інструментів
+          {t('shownTools', { from: filteredTools.length, to: aiTools.length })}
         </p>
       </div>
       {filteredTools.length === 0 && (
         <div className="w-full text-center">
-          <h2 className="text-2xl font-bold">Нічого не знайдено</h2>
-          <p className="text-lg">Спробуйте змінити параметри пошуку</p>
+          <h2 className="text-2xl font-bold">{t('notFound.header')}</h2>
+          <p className="text-lg">{t('notFound.subheader')}</p>
         </div>
       )}
       <div className="container mx-auto grid place-content-between gap-10 px-10 transition-all md:grid-cols-2 md:px-0">

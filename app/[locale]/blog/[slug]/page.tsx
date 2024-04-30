@@ -13,17 +13,12 @@ export default async function Blogs({
   return (
     <div className="prose mx-auto">
       <h1 className="my-5 text-4xl font-bold">{blog.frontmatter.title}</h1>
-      <div className="my-5 flex items-center">
-        {/* <Image
-          src={blog.frontmatter.authorAvatar}
-          alt={blog.frontmatter.author}
-          width={40}
-          height={40}
-          className="rounded-full"
-        /> */}
-        <p className="ml-3 text-slate-500">{blog.frontmatter.author}</p>
-        <p className="ml-3 text-slate-500">
-          {new Date(blog.frontmatter.date).toLocaleDateString()}
+      <div className="my-5 flex items-center gap-4">
+        <p className=" text-slate-500">{blog.frontmatter.author}</p>
+        <p className="text-sm text-slate-500">
+          {new Date(blog.frontmatter.date).toLocaleString('uk-UA', {
+            dateStyle: 'full',
+          })}
         </p>
       </div>
       <Image

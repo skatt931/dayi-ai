@@ -1,6 +1,9 @@
-import { AiToolData } from '@/types';
+import { AiToolData, CATEGORIES } from '@/types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+export const categoryValues = Object.values(CATEGORIES);
+export const categoryKeys = Object.keys(CATEGORIES);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -36,7 +36,7 @@ const Search = () => {
         <div>
           <input
             className="input join-item input-bordered w-full"
-            placeholder="Знайди свій інструмент AI"
+            placeholder="Шукати з понад 500+ інструментів AI"
             aria-label="Знайди свій інструмент AI"
             onChange={(e) => {
               handleSearch(e.target.value);

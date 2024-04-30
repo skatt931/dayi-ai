@@ -28,7 +28,7 @@ const Card: React.FC<AiToolData> = ({
       <div
         className={cn(
           'card card-side card-compact w-full bg-base-100 shadow-xl',
-          'to-primary-dark m-auto h-48 max-w-80 bg-gradient-to-r from-secondary/10  hover:shadow-sm md:hover:shadow-2xl lg:min-h-48 lg:min-w-96 lg:max-w-none lg:p-0',
+          'to-primary-dark m-auto h-48 max-w-80 bg-accent/5  hover:shadow-sm md:hover:shadow-2xl lg:min-h-48 lg:min-w-96 lg:max-w-none lg:p-0',
         )}
       >
         <figure className="w-2/6 lg:w-5/12">
@@ -55,7 +55,7 @@ const Card: React.FC<AiToolData> = ({
           </a>
           {!!specialTags &&
             specialTags.map((tag) => (
-              <div key={tag} className={cn('badge badge-primary', 'text-xs')}>
+              <div key={tag} className={cn('badge badge-success', 'text-xs')}>
                 {tag}
               </div>
             ))}
@@ -68,15 +68,9 @@ const Card: React.FC<AiToolData> = ({
             {shortDescription}
           </p>
           <div className={(cn('card-actions'), 'flex justify-between')}>
-            {!!categories &&
-              categories.map((tag) => (
-                <div key={tag} className="badge badge-outline text-xs">
-                  {CATEGORIES[tag as keyof typeof CATEGORIES]}
-                </div>
-              ))}
-            {/* <div className={cn('badge badge-ghost min-h-fit', 'text-xs')}>
-                      {pricing}
-                    </div> */}
+            <div className={cn('badge badge-primary', 'text-xs text-black')}>
+              {pricing}
+            </div>
             <LikesCounter likesNumber={likes} toolId={id} />
           </div>
         </div>

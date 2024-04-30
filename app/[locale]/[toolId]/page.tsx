@@ -2,11 +2,12 @@
 
 import { useGetDocumentById } from '@/hooks/useGetDocuments';
 import { cn } from '@/lib/utils';
-import { type AiToolData } from '@/types';
+import { CATEGORIES, type AiToolData } from '@/types';
 import { ExternalLink, ThumbsDown, ThumbsUp } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
+import SimilarTools from './components/SimilarTools';
 
 const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
   const [aiToolData, setAiToolData] = React.useState<AiToolData | null>(null);
@@ -19,19 +20,15 @@ const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
   }, []);
 
   return (
-    <div className="to-primary-dark bg-gradient-to-r from-secondary/10 pb-20">
-      <div
-        className={cn(
-          'bg-current-200 container hero h-auto w-full max-w-full overflow-hidden py-10',
-        )}
-      >
+    <div className="to-primary-dark bg-gradient-to-r from-secondary/10 pb-10">
+      <div className="bg-current-200 container hero h-auto w-full max-w-full overflow-hidden py-5 md:py-10">
         <div className={cn('hero-content text-center', 'w-full lg:px-0')}>
-          <div className="grid w-full max-w-full gap-20 md:grid-cols-2">
+          <div className="grid w-full max-w-full gap-5 md:grid-cols-2 md:gap-20">
             <div className="place-self-center justify-self-center">
               <Image
-                src={aiToolData?.imageUrl}
-                width={384}
-                height={384}
+                src={aiToolData?.imageUrl ? aiToolData.imageUrl : ''}
+                width={550}
+                height={550}
                 className="rounded-lg shadow-lg"
                 alt="Chat GPT tool image"
               />
@@ -40,23 +37,33 @@ const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
               <h1 className="text-2xl font-bold lg:text-3xl">
                 {aiToolData?.title}
               </h1>
-              <p className="text-gray-500">{aiToolData?.categories}</p>
-              <p className="text-sm lg:py-6 lg:text-base">
+              <p className="text-gray-500">
+                {
+                  CATEGORIES[
+                    aiToolData?.categories[0] as keyof typeof CATEGORIES
+                  ]
+                }
+              </p>
+              <p className="py-3 text-sm md:py-6 lg:text-base">
                 {aiToolData?.completeDescription ||
                   aiToolData?.shortDescription}
               </p>
               <div className="grid gap-5">
-                <div className="flex gap-3">
-                  <p className="font-bold">Pricing: </p>
+                <div className="my-3 flex gap-3">
+                  <p className="font-bold">Ціна: </p>
                   <div className="badge badge-primary">
                     {aiToolData?.pricing}
                   </div>
                 </div>
                 {!!aiToolData?.categories && (
-                  <div className="flex gap-3">
-                    <p className="font-bold">Tags: </p>
-                    <div className="badge badge-secondary">
-                      {aiToolData?.categories}
+                  <div className="md:flex">
+                    <p className="mb-3 mr-3 font-bold">Категорії: </p>
+                    <div className="flex flex-wrap gap-3 md:flex-row">
+                      {aiToolData?.categories.map((category) => (
+                        <div className="badge badge-secondary" key={category}>
+                          {CATEGORIES[category as keyof typeof CATEGORIES]}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}
@@ -65,14 +72,14 @@ const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
                     href={aiToolData?.linkToTool || '#'}
                     className="btn btn-outline btn-primary"
                   >
-                    Visit site
+                    Відвідати сайт
                     <ExternalLink />
                   </Link>
                   <Link
                     href="https://openai.com"
                     className="btn btn-outline btn-secondary"
                   >
-                    Inform about changes
+                    Сповістити про помилку
                   </Link>
                 </div>
               </div>
@@ -80,25 +87,50 @@ const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto py-5">
-        <div className="grid gap-20 md:grid-cols-2">
-          <div className="rounded-md bg-zinc-400/30 p-5">
-            <div className="flex justify-center gap-5 pb-10">
+      <div className="container mx-auto p-5 py-5">
+        <div className="grid gap-5 md:grid-cols-2 md:gap-20">
+          <div className="rounded-md bg-zinc-200/10 p-5 shadow-[0_0_10px_theme('colors.blue.200')_,0_0_10px_theme('colors.blue.700')]">
+            <div className="flex justify-center gap-5 pb-5">
               <ThumbsUp className="text-green-600" />
-              <span>Переваги</span>
+              <span className="font-semibold">Переваги</span>
             </div>
             <div>
-              <ul>{aiToolData?.pros.map((pro) => <li key={pro}>{pro}</li>)}</ul>
+              <ul className="list-disc pl-5 font-semibold">
+                {aiToolData?.pros.map((pro) => (
+                  <li className="my-5" key={pro}>
+                    {pro}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className="rounded-md bg-zinc-400/30 p-5">
-            <div className="flex justify-center gap-5 pb-10 text-center">
+          <div className="rounded-md bg-zinc-200/10 p-5  shadow-[0_0_10px_theme('colors.blue.200')_,0_0_10px_theme('colors.blue.700')]">
+            <div className="flex justify-center gap-5 pb-5 text-center">
               <ThumbsDown className="text-red-600" />
-              <span>Недоліки</span>
+              <span className="font-semibold">Недоліки</span>
             </div>
             <div>
-              <ul>{aiToolData?.cons.map((con) => <li key={con}>{con}</li>)}</ul>
+              <ul className="list-disc pl-5 font-semibold">
+                {aiToolData?.cons.map((con) => (
+                  <li className="my-5" key={con}>
+                    {con}
+                  </li>
+                ))}
+              </ul>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="container mx-auto p-5 py-5">
+        <div>
+          <h2 className="mb-5 text-center text-xl font-semibold">
+            Схожі інструменти:
+          </h2>
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+            <SimilarTools
+              toolCategory={aiToolData?.categories[0]}
+              toolDocumentId={toolId}
+            />
           </div>
         </div>
       </div>

@@ -26,6 +26,7 @@ export default async function Blogs({
         alt={blog.frontmatter.title}
         width={600}
         height={600}
+        draggable="false"
         objectFit="cover"
         className="mt-5 w-full rounded-lg"
       />

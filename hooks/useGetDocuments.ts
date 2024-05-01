@@ -10,6 +10,7 @@ import {
   orderBy,
   query,
   startAt,
+  updateDoc,
   where,
 } from 'firebase/firestore';
 
@@ -64,4 +65,16 @@ export const useGetDocumentById = () => {
   };
 
   return { getDocById };
+};
+
+export const useUpdateLikes = () => {
+  const updateDocumentLikes = async (id: string, likes: number) => {
+    const collectionRef = collection(firebaseDB, 'tools');
+    const docRef = doc(collectionRef, id);
+    await updateDoc(docRef, {
+      likes: likes,
+    });
+  };
+
+  return { updateDocumentLikes };
 };

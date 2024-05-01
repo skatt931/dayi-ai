@@ -17,7 +17,7 @@ export default async function Blogs() {
             <Link
               key={slug}
               href={`blog/${slug}`}
-              className="card w-96 border-base-300/50 bg-base-200 text-base-content hover:shadow-lg"
+              className="card w-96 border-base-300/50 bg-base-200 text-base-content transition-all hover:shadow-[0_0_15px_theme(colors.violet.200),0_0_15px_theme(colors.violet.500)]"
             >
               <figure className="w-full">
                 <Image
@@ -25,8 +25,8 @@ export default async function Blogs() {
                   alt="car!"
                   width={400}
                   height={400}
-                  objectFit="cover"
-                  objectPosition="center"
+                  draggable="false"
+                  priority={false}
                 />
               </figure>
               <div className="card-body min-h-72 gap-5">

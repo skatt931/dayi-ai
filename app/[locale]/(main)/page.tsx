@@ -1,8 +1,9 @@
 'use client';
 
 import Cards from '@/components/ui/Card/Cards';
-import Filters from '@/components/ui/Filters';
-import Search from '@/components/ui/Search';
+import Filters from '@/components/ui/filters';
+import Message from '@/components/ui/Message';
+import Search from '@/components/ui/search';
 import Skeleton from '@/components/ui/Skeleton';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
@@ -33,6 +34,8 @@ export default function Home({
 
   return (
     <div className="pb-20">
+      {/* TODO: Enable later */}
+      {/* <Message /> */}
       <div
         className={cn(
           'container hero',

@@ -60,3 +60,7 @@ export const sortTools = (
 
   return sortedTools;
 };
+
+export const sortToolsByPromoted = (aiTools: AiToolData[]) => {
+  return aiTools.sort((a, b) => Number(b.promoted) - Number(a.promoted));
+};

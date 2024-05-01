@@ -13,9 +13,9 @@ const ThemeController = () => {
         type="checkbox"
         className="theme-controller"
         aria-label="Змінити тему"
-        checked={theme === 'pastel'}
+        checked={theme === 'sunset'}
         onChange={() => {
-          setTheme(theme === 'sunset' ? 'pastel' : 'sunset');
+          setTheme(theme === 'pastel' ? 'sunset' : 'pastel');
         }}
       />
 

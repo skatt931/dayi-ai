@@ -1,3 +1,4 @@
+import { useUpdateLikes } from '@/hooks/useGetDocuments';
 import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
 
@@ -5,12 +6,14 @@ const LikesCounter = ({
   likesNumber,
   toolId,
 }: {
-  likesNumber?: number;
-  toolId?: number;
+  likesNumber: number;
+  toolId: string;
 }) => {
   const [checked, setChecked] = useState<boolean>(
     !!localStorage.getItem(`toolID: ${toolId}`),
   );
+  const [likesNumberLocal, setLikesNumberLocal] = useState<number>(likesNumber);
+  const { updateDocumentLikes } = useUpdateLikes();
 
   const handleClick = (
     event: React.MouseEvent<HTMLInputElement, MouseEvent>,
@@ -19,9 +22,13 @@ const LikesCounter = ({
     if (localStorage.getItem(`toolID: ${toolId}`)) {
       setChecked(false);
       localStorage.removeItem(`toolID: ${toolId}`);
+      updateDocumentLikes(toolId, likesNumber - 1);
+      setLikesNumberLocal(likesNumber - 1);
     } else {
       localStorage.setItem(`toolID: ${toolId}`, 'true');
       setChecked(true);
+      updateDocumentLikes(toolId, likesNumber + 1);
+      setLikesNumberLocal(likesNumber + 1);
     }
   };
 
@@ -38,11 +45,7 @@ const LikesCounter = ({
           `${checked ? 'bg-red-400' : 'bg-red-300'} w-5`,
         )}
       />
-      <span className="ml-1">
-        {checked && typeof likesNumber === 'number'
-          ? likesNumber + 1
-          : likesNumber}
-      </span>
+      <span className="ml-1">{likesNumberLocal}</span>
     </div>
   );
 };

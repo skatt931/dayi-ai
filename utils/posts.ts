@@ -1,13 +1,29 @@
 import fs from 'fs';
 import path from 'path';
 import { compileMDX } from 'next-mdx-remote/rsc';
+import Head from 'next/head';
+import Link from 'next/link';
 
-const contentDir = path.join(process.cwd(), './pages');
+const contentDir = path.join(process.cwd(), './pages/blog');
+const aboutContentDir = path.join(process.cwd(), './pages/about');
 
-export async function getBlogBySlug(slug: string) {
+// const components = {
+//   h2: `<div>'''</div>`,
+//   // It also works with dynamically-imported components, which is especially
+//   // useful for conditionally loading components for certain routes.
+//   // See the notes in README.md for more details.
+//   Head,
+// };
+
+export async function getBlogBySlug(
+  slug: string,
+  dir: 'pages' | 'about' = 'pages',
+) {
   const fileName = slug + '.mdx';
-  const filePath = path.join(contentDir, fileName);
+  const contentPath = dir === 'pages' ? contentDir : aboutContentDir;
+  const filePath = path.join(contentPath, fileName);
   const fileContent = fs.readFileSync(filePath, 'utf8');
+
   const { frontmatter, content } = await compileMDX<{
     title: string;
     author: string;
@@ -15,14 +31,17 @@ export async function getBlogBySlug(slug: string) {
     description: string;
     authorAvatar: string;
     image: string;
+    keywords: string[];
   }>({
     source: fileContent,
     options: { parseFrontmatter: true },
   });
+
   return {
     frontmatter,
-    content,
+    content: content,
     slug: path.parse(fileName).name,
+    fileContent,
   };
 }
 

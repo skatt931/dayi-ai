@@ -36,8 +36,6 @@ export const useGetDocuments = () => {
 
 export const useGetDocumentsFromCategory = () => {
   const getDoc = async (path: string, toolCategory: string | undefined) => {
-    console.log('toolCategory', toolCategory);
-
     const collectionRef = collection(firebaseDB, path);
     const q = await query(
       collectionRef,

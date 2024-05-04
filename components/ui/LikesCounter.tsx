@@ -7,7 +7,7 @@ const LikesCounter = ({
   toolId,
 }: {
   likesNumber: number;
-  toolId: string;
+  toolId: string | undefined;
 }) => {
   const [checked, setChecked] = useState<boolean>(
     !!localStorage.getItem(`toolID: ${toolId}`),
@@ -22,12 +22,12 @@ const LikesCounter = ({
     if (localStorage.getItem(`toolID: ${toolId}`)) {
       setChecked(false);
       localStorage.removeItem(`toolID: ${toolId}`);
-      updateDocumentLikes(toolId, likesNumber - 1);
+      if (toolId) updateDocumentLikes(toolId, likesNumber - 1);
       setLikesNumberLocal(likesNumber - 1);
     } else {
       localStorage.setItem(`toolID: ${toolId}`, 'true');
       setChecked(true);
-      updateDocumentLikes(toolId, likesNumber + 1);
+      if (toolId) updateDocumentLikes(toolId, likesNumber + 1);
       setLikesNumberLocal(likesNumber + 1);
     }
   };

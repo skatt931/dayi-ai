@@ -41,7 +41,7 @@ const Filters = () => {
   return (
     <form
       ref={formRef}
-      className="hidden justify-items-start md:grid md:grid-cols-6"
+      className="grid grid-cols-3 justify-items-start md:grid md:grid-cols-6"
     >
       {categoryValues.map((filter) => (
         <div

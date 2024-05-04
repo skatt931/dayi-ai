@@ -1,33 +1,42 @@
+'use client';
+
+import { cn } from '@/lib/utils';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import navigation from '../../nav-links.json';
 
 const Drawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="drawer px-2">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
-        {/* Page content here */}
-        <label htmlFor="my-drawer">
-          <Menu />
-        </label>
+    <div className="dropdown dropdown-bottom lg:hidden">
+      <div
+        tabIndex={0}
+        role="button"
+        className="btn btn-ghost rounded-btn"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <Menu />
       </div>
-      <div className="drawer-side z-10">
-        <label
-          htmlFor="my-drawer"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <ul className="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
-          {/* Sidebar content here */}
-          {navigation.map((item) => (
-            <li key={item.title}>
-              <Link href={`uk/${item.linkUrl}`}>{item.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul
+        tabIndex={0}
+        className={cn(
+          'menu dropdown-content z-[1] mt-2 w-52 rounded-box bg-base-100 p-2 shadow',
+          `${isOpen ? 'block' : 'hidden'}`,
+        )}
+      >
+        {navigation.map((item) => (
+          <li key={item.title}>
+            <Link
+              href={`/uk/${item.linkUrl}`}
+              className="h-full w-full"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {item.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 'use client';
 
 import Cards from '@/components/ui/Card/Cards';
-import Filters from '@/components/ui/filters';
+import DialogWindow from '@/components/ui/DialogWindow';
+import Filters from '@/components/ui/Filters';
 import Message from '@/components/ui/Message';
-import Search from '@/components/ui/search';
+import Search from '@/components/ui/Search';
 import Skeleton from '@/components/ui/Skeleton';
 import { cn } from '@/lib/utils';
+import { Filter, SearchIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
 
@@ -39,10 +41,10 @@ export default function Home({
       <div
         className={cn(
           'container hero',
-          'h-auto w-full max-w-full overflow-hidden bg-gradient-to-b from-accent/5 to-secondary/10  py-5',
+          'w-full max-w-full bg-gradient-to-b from-accent/5 to-secondary/10  py-5',
         )}
       >
-        <div className={cn('hero-content text-center', 'bg-red w-full')}>
+        <div className={cn('hero-content text-center', 'w-full')}>
           <div className="w-full max-w-full">
             <h1 className="my-5 text-2xl font-bold lg:text-3xl">
               {/* <span>Відкрий свою суперсилу з Дай</span> [{' '}
@@ -58,14 +60,26 @@ export default function Home({
             <Search />
             {/* TODO: CHeck mobile version */}
             {/* <section className="hidden justify-items-start md:grid md:grid-cols-6"> */}
-            <Filters />
+            <div className="hidden md:block">
+              <Filters />
+            </div>
             {/* </section> */}
-            <section className="collapse mt-10 bg-base-200 md:hidden">
-              <input type="checkbox" aria-label="фільтри" />
-              <div className="collapse-title text-xl font-medium">Фільтри</div>
-              <div className="collapse-content grid grid-cols-2">
-                <Filters />
-              </div>
+            <section className="sticky top-10 mt-10 bg-base-200 md:hidden">
+              <ul className="menu rounded-box bg-base-200 lg:menu-horizontal">
+                <li>
+                  <a
+                    onClick={() =>
+                      document.getElementById('my_modal').showModal()
+                    }
+                  >
+                    <Filter />
+                    Фільтри
+                    <span className="badge badge-secondary">
+                      {filterQuery ? filterQuery.split(',').length : 0}
+                    </span>
+                  </a>
+                </li>
+              </ul>
             </section>
           </div>
         </div>
@@ -84,6 +98,7 @@ export default function Home({
           <Cards />
         </Suspense>
       </section>
+      <DialogWindow />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/ui/Footer';
-import Navbar from '@/components/ui/navbar';
+import Navbar from '@/components/ui/Navbar';
 import { AiToolProvider } from '@/context/aiToolContext';
 import { cn } from '@/lib/utils';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
@@ -11,27 +11,44 @@ import { ThemeProvider } from 'next-themes';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Dayi AI',
+  title: 'Дай [ ai ]',
   description:
     'Додатки та інструменти з використанням штучного інтелекту в наш час стають усе популярнішими. Тому пропонуємо вас сайт з пошуком найкращих іструметів для роботи з AI(ШІ).',
   openGraph: {
-    title: 'Dayi AI',
+    title: 'Дай [ ai ]',
     description:
       'Додатки та інструменти з використанням штучного інтелекту в наш час стають усе популярнішими. Тому пропонуємо вас сайт з пошуком найкращих іструметів для роботи з AI(ШІ).',
 
-    siteName: 'Dayi AI',
+    siteName: 'Дай [ ai ]',
     locale: 'uk_UA',
     type: 'website',
   },
   keywords: [
+    'Агрегатор ШІ',
+    'Агрегатор Інструментів штучного інтелекту',
+    'Агрегатор AI',
+    'Колекція Інструментів штучного інтелекту',
+    'База даних AI',
+    'Список AI',
+    'Каталог AI',
+    'Пошук AI',
+    'Інструменти Штучного Інтелекту',
+    'Інструменти ШІ',
+    'Інструменти AI',
+    'AI tools',
+    'Штучний інтелект',
+    'Блог AI',
     'AI',
     'ШІ',
-    'Штучний інтелект',
     'Український Штучний Інтелект',
+    'Штучний Інтелект України',
     'Artificial Intelegency Ukraine',
   ],
   creator: 'Ihor Kurnytskyi',
   publisher: 'Ihor Kurnytskyi',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({

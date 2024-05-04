@@ -19,7 +19,7 @@ const Navbar = () => {
             <Drawer />
           </div>
           <Link href={`/uk/`} className="btn btn-ghost text-xl">
-            <span>Дай</span>[<span className="text-pink-400">AI</span>]
+            <span>Дай</span>[<span className="text-pink-400">ai</span>]
           </Link>
         </div>
         <nav className="navbar-center hidden lg:flex">
@@ -32,6 +32,13 @@ const Navbar = () => {
           </ul>
         </nav>
         <div className="navbar-end">
+          <Link
+            href="https://buymeacoffee.com/ihorKurnytskyi"
+            className="btn btn-outline btn-sm mr-5"
+            target="_blank"
+          >
+            Підтримати
+          </Link>
           <ThemeController />
         </div>
       </div>

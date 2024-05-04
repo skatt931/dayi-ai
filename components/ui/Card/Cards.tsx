@@ -45,13 +45,13 @@ const Cards = () => {
 
   return (
     <>
-      <div className="container mx-auto py-5 ">
+      <div className="container mx-auto p-4">
         <p className="text-center font-bold md:text-left">
           {t('shownTools', { from: filteredTools.length, to: aiTools.length })}
         </p>
       </div>
       {filteredTools.length === 0 && (
-        <div className="grid grid-cols-1 justify-center gap-5 text-center">
+        <div className="grid grid-cols-1 justify-center gap-5 px-5 text-center">
           <h2 className="text-2xl font-bold">{t('notFound.header')}</h2>
           <p className="text-lg">{t('notFound.subheader')}</p>
           <Image
@@ -63,7 +63,7 @@ const Cards = () => {
           />
         </div>
       )}
-      <div className="container mx-auto grid place-content-between gap-10 px-10 transition-all md:grid-cols-2 md:px-0">
+      <div className="container mx-auto grid place-content-between gap-10 px-4 transition-all md:grid-cols-2 md:p-4">
         {toolsPerPage.map((tool) => (
           <Card key={tool.id} {...tool} />
         ))}

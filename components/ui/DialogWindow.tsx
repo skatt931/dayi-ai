@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
-import Filters from './Filters';
+import Filters from './filters';
 
 const DialogWindow = () => {
   return (

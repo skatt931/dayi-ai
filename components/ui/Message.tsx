@@ -1,12 +1,25 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import React from 'react';
 
 const Message = () => {
-  const [show, setShow] = React.useState(true);
+  const [show, setShow] = React.useState(false);
   const handleClick = () => {
     setShow(false);
   };
+
+  // show message after 1 minute since user visited and don't show again this day
+  React.useEffect(() => {
+    const visited = localStorage.getItem('visited');
+    if (!visited) {
+      setTimeout(() => {
+        setShow(true);
+        localStorage.setItem('visited', 'true');
+      }, 60000);
+    }
+  }, []);
 
   return (
     <div

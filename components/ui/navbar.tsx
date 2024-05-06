@@ -1,4 +1,4 @@
-import Drawer from '@/components/ui/Drawer';
+import Drawer from '@/components/ui/drawer';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import React from 'react';
@@ -25,7 +25,7 @@ const Navbar = () => {
         <nav className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {navigation.map((navItem) => (
-              <li key={navItem.title}>
+              <li key={navItem.title} className="pr-1">
                 <Link href={`/uk/${navItem.linkUrl}`}>{navItem.title}</Link>
               </li>
             ))}

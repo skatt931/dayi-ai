@@ -5,6 +5,10 @@ import React from 'react';
 
 const ThemeController = () => {
   const { theme, setTheme } = useTheme();
+  // set default theme if no theme is set
+  if (theme === null) {
+    setTheme('pastel');
+  }
 
   return (
     <label className="swap swap-rotate">

@@ -3,5 +3,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="w-full bg-secondary/5 p-5">{children}</div>;
+  return <main className="w-full bg-accent/5 p-5">{children}</main>;
 }

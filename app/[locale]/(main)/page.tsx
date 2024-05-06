@@ -36,8 +36,7 @@ export default function Home({
 
   return (
     <div className="pb-20">
-      {/* TODO: Enable later */}
-      {/* <Message /> */}
+      <Message />
       <div
         className={cn(
           'container hero',

@@ -2,12 +2,12 @@
 
 import Cards from '@/components/ui/Card/Cards';
 import DialogWindow from '@/components/ui/DialogWindow';
-import Filters from '@/components/ui/Filters';
+import Filters from '@/components/ui/filters';
 import Message from '@/components/ui/Message';
-import Search from '@/components/ui/Search';
+import Search from '@/components/ui/search';
 import Skeleton from '@/components/ui/Skeleton';
 import { cn } from '@/lib/utils';
-import { Filter, SearchIcon } from 'lucide-react';
+import { Filter } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
 
@@ -46,8 +46,6 @@ export default function Home({
         <div className={cn('hero-content text-center', 'w-full')}>
           <div className="w-full max-w-full">
             <h1 className="my-5 text-2xl font-bold lg:text-3xl">
-              {/* <span>Відкрий свою суперсилу з Дай</span> [{' '}
-              <span className="text-pink-400">AI</span> ] */}
               {t.rich('header', {
                 first: (chunks) => <span>{chunks}</span>,
                 second: (chunks) => (
@@ -57,18 +55,16 @@ export default function Home({
             </h1>
             <p className="mb-10 text-sm lg:text-base">{t('subheader')}</p>
             <Search />
-            {/* TODO: CHeck mobile version */}
-            {/* <section className="hidden justify-items-start md:grid md:grid-cols-6"> */}
             <div className="hidden md:block">
               <Filters />
             </div>
-            {/* </section> */}
             <section className="sticky top-10 mt-10 bg-base-200 md:hidden">
               <ul className="menu rounded-box bg-base-200 lg:menu-horizontal">
                 <li>
                   <a
                     onClick={() =>
-                      document.getElementById('my_modal').showModal()
+                      // @ts-ignore
+                      document?.getElementById('my_modal')?.showModal()
                     }
                   >
                     <Filter />

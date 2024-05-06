@@ -5,7 +5,6 @@ import DialogWindow from '@/components/ui/DialogWindow';
 import Filters from '@/components/ui/filters';
 import Message from '@/components/ui/Message';
 import Search from '@/components/ui/search';
-import Skeleton from '@/components/ui/Skeleton';
 import { cn } from '@/lib/utils';
 import { Filter } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -85,7 +84,9 @@ export default function Home({
           fallback={
             <div className="h-96 w-96">
               {[1, 2, 3, 4, 5, 6].map((id) => (
-                <Skeleton key={id} />
+                <div key={id} className="card bg-base-200">
+                  Test
+                </div>
               ))}
             </div>
           }

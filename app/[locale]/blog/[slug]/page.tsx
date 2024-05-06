@@ -23,6 +23,7 @@ export async function generateMetadata({
       title: blog.frontmatter.title,
       description: blog.frontmatter.description,
       type: 'article',
+      // images: [blog.frontmatter.image],
     },
     twitter: {
       card: 'summary_large_image',

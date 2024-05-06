@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { TwitterShareButton } from 'react-share';
 import SimilarTools from './components/SimilarTools';
 
@@ -56,7 +56,9 @@ const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
                   height={550}
                   draggable="false"
                   className="rounded-lg shadow-lg"
-                  alt="Chat GPT tool image"
+                  alt={aiToolData?.title || 'AI Tool'}
+                  blurDataURL={aiToolData?.imageUrl}
+                  priority={true}
                 />
               </div>
               <div className="text-left">

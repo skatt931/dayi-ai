@@ -1,11 +1,13 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
 
 const Message = () => {
   const [show, setShow] = React.useState(false);
+  const t = useTranslations('Support');
   const handleClick = () => {
     setShow(false);
   };
@@ -23,15 +25,18 @@ const Message = () => {
 
   return (
     <div
-      className={cn('fixed right-2 top-2 z-10', `${show ? 'block' : 'hidden'}`)}
+      className={cn(
+        'pointer-events-none fixed bottom-2 right-2 z-10 transform transition-all duration-300 ease-in-out',
+        `${show ? ' pointer-events-auto scale-100 opacity-100' : 'scale-95 opacity-0'}`,
+      )}
     >
       <div
         role="alert"
-        className="alert relative h-auto w-[500px] border-none bg-accent text-accent-content shadow-lg"
+        className="alert h-auto w-full border-none bg-base-300 text-base-content shadow-lg md:w-[500px]"
       >
         <div>
           <button
-            className="accent btn btn-circle btn-outline btn-sm text-accent-content"
+            className="accent btn btn-circle btn-outline btn-sm text-base-content"
             onClick={handleClick}
           >
             <svg
@@ -51,19 +56,23 @@ const Message = () => {
           </button>
         </div>
         <div>
-          <h3 className="pb-2 font-bold">Нам потрібна ваша підтримка!</h3>
+          <h3 className="pb-2 font-bold">{t('header')}</h3>
           <div className="flex flex-wrap gap-2 text-xs">
             <p>
-              Цей проект може існувати лише завдяки <b>вам</b>.
+              {t.rich('subheader', {
+                b: (chunks) => <b>{chunks}</b>,
+              })}
             </p>
             <p>
-              Підтримайте проект на <b>buy me a coffee</b> ☕️
+              {t.rich('subheader2', {
+                b: (chunks) => <b>{chunks}</b>,
+              })}
             </p>
             <Link
-              className="text-accent-content underline hover:text-accent-content/70"
+              className=" underline hover:text-base-content/70"
               href="/uk/about/"
             >
-              Деталі за посиланням
+              {t('detailsCTA')}
             </Link>
           </div>
         </div>
@@ -72,7 +81,7 @@ const Message = () => {
           target="_blank"
           className="btn btn-link btn-sm text-warning hover:text-warning/70"
         >
-          Підтримати
+          {t('supportCTA')}
         </Link>
       </div>
     </div>

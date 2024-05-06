@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/ui/footer';
+import Message from '@/components/ui/Message';
 import Navbar from '@/components/ui/navbar';
 import { AiToolProvider } from '@/context/aiToolContext';
 import GoogleAnalytics from '@/GoogleAnalytics';
@@ -19,10 +20,14 @@ export const metadata: Metadata = {
     title: 'Дай [ ai ]',
     description:
       'Додатки та інструменти з використанням штучного інтелекту в наш час стають усе популярнішими. Тому пропонуємо вас сайт з пошуком найкращих іструметів для роботи з AI(ШІ).',
-
     siteName: 'Дай [ ai ]',
     locale: 'uk_UA',
     type: 'website',
+    images: [
+      {
+        url: '/main-page.webp',
+      },
+    ],
   },
   keywords: [
     'Агрегатор ШІ',
@@ -69,7 +74,10 @@ export default function RootLayout({
           <ThemeProvider>
             <AiToolProvider>
               <Navbar />
-              <main data-theme>{children}</main>
+              <main data-theme>
+                <Message />
+                {children}
+              </main>
               <Footer />
             </AiToolProvider>
           </ThemeProvider>

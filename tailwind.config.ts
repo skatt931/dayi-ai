@@ -16,21 +16,7 @@ const config: Config = {
     addVariablesForColors,
   ],
   daisyui: {
-    themes: [
-      'light',
-      'dark',
-      'cupcake',
-      'emerald',
-      'cmyk',
-      'dim',
-      'lofi',
-      'forest',
-      'sunset',
-      'nord',
-      'pastel',
-      'fantasy',
-      'winter',
-    ],
+    themes: ['sunset', 'pastel'],
   },
 };
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { sendEmail } from '@/utils/send-email';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -12,6 +13,7 @@ export type FormData = {
 
 const Contact: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
+  const t = useTranslations('Contact');
 
   function onSubmit(data: FormData) {
     sendEmail(data);
@@ -24,11 +26,11 @@ const Contact: FC = () => {
           htmlFor="name"
           className="input input-bordered flex items-center gap-2"
         >
-          Ім&aposя
+          {t('form.name')}
           <input
             type="text"
             className="grow"
-            placeholder="Повне ім'я"
+            placeholder={t('form.namePlaceholder')}
             {...register('name', { required: true })}
           />
         </label>
@@ -38,10 +40,10 @@ const Contact: FC = () => {
           htmlFor="email"
           className="input input-bordered flex items-center gap-2"
         >
-          Email адреса
+          {t('form.email')}
           <input
             type="email"
-            placeholder="example@domain.com"
+            placeholder={t('form.emailPlaceholder')}
             className="grow"
             {...register('email', { required: true })}
           />
@@ -49,17 +51,17 @@ const Contact: FC = () => {
       </div>
       <div className="mb-5">
         <label htmlFor="message" className="mb-3 block text-base font-medium ">
-          Повідомлення
+          {t('form.message')}
         </label>
         <textarea
           rows={4}
-          placeholder="Введіть ваше повідомлення тут..."
+          placeholder={t('form.messagePlaceholder')}
           className="textarea textarea-bordered w-full resize-none"
           {...register('message', { required: true })}
         ></textarea>
       </div>
       <div>
-        <button className="btn btn-primary">Відправити</button>
+        <button className="btn btn-primary">{t('form.submit')}</button>
       </div>
     </form>
   );

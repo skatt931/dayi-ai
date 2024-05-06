@@ -1,4 +1,22 @@
 {
+  "Navigation": {
+    "home": {
+      "title": "Головна",
+      "url": "/"
+    },
+    "blog": {
+      "title": "Блог",
+      "url": "/blog"
+    },
+    "contact": {
+      "title": "Контакти",
+      "url": "/contact"
+    },
+    "about": {
+      "title": "Про нас",
+      "url": "/about"
+    }
+  },
   "Hero": {
     "header": "<first>Відкрий свою суперсилу з Дай</first> [ <second>ai</second> ]",
     "subheader": "Оптимізуйте свій робочий процес за допомогою нашї колеції інструментів штучного інтелекту - знайдіть своє ідеальне рішення!",
@@ -13,7 +31,7 @@
         "new": "Нові",
         "popularity": "Популярні",
         "az": "За назвою (А-Я)",
-        "za": "За назвою (Я-А",
+        "za": "За назвою (Я-А)",
         "newOld": "За датою додавання (нові-старі)",
         "oldNew": "За датою додавання (старі-нові)"
       }
@@ -43,5 +61,31 @@
     "header": "Блог",
     "readMore": "Читати далі",
     "featured": "Рекомендовані статті"
+  },
+  "Contact": {
+    "form": {
+      "name": "Ім'я",
+      "namePlaceholder": "Повне ім'я",
+      "email": "Email",
+      "emailPlaceholder": "example@domain.com",
+      "message": "Повідомлення",
+      "messagePlaceholder": "Ваше повідомлення...",
+      "submit": "Відправити"
+    }
+  },
+  "Support": {
+    "header": "Нам потрібна ваша підтримка!",
+    "subheader": "Цей проект може існувати лише завдяки <b>вам</b>.",
+    "subheader2": "Підтримайте проект на <b>buy me a coffee</b> ☕️",
+    "detailsCTA": "Дізнатися більше",
+    "supportCTA": "Підтримати"
+  },
+  "Footer": {
+    "patreon": "Підтримати на Patreon",
+    "github": "GitHub",
+    "email": "Напишіть нам",
+    "privacy": "Політика конфіденційності",
+    "terms": "Умови використання",
+    "copyright": "Copyright © 2024 - Всі права захищені Дай [ ai ]"
   }
 }

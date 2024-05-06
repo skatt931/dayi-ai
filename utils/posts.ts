@@ -1,19 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import Head from 'next/head';
-import Link from 'next/link';
 
 const contentDir = path.join(process.cwd(), './pages/blog');
-const aboutContentDir = path.join(process.cwd(), './pages/about');
-
-// const components = {
-//   h2: `<div>'''</div>`,
-//   // It also works with dynamically-imported components, which is especially
-//   // useful for conditionally loading components for certain routes.
-//   // See the notes in README.md for more details.
-//   Head,
-// };
+const aboutContentDir = path.join(process.cwd(), './pages/uk/about');
 
 export async function getBlogBySlug(
   slug: string,

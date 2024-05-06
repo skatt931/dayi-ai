@@ -1,9 +1,10 @@
-'use client';
-
 import { Link } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
-const Footer = () => {
+const Footer = async () => {
+  const t = await getTranslations('Footer');
+
   return (
     <footer className="footer footer-center rounded bg-base-200 p-10 text-base-content">
       <nav className="grid grid-flow-col gap-4">

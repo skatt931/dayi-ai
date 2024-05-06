@@ -35,14 +35,6 @@ export async function generateMetadata({
   };
 }
 
-const components = {
-  h1: (props: any) => (
-    <h1 {...props} className="text-blue-300">
-      {props.children}
-    </h1>
-  ),
-};
-
 export default async function Blogs({
   params,
 }: {
@@ -54,10 +46,27 @@ export default async function Blogs({
 
   return (
     <div className="prose mx-auto">
-      <h1 className="my-5 text-4xl font-bold">{blog.frontmatter.title}</h1>
-      <div className="my-5 flex items-center gap-4">
-        <p className=" text-slate-500">{blog.frontmatter.author}</p>
-        <p className="text-sm text-slate-500">
+      {blog.frontmatter.keywords && (
+        <div className="flex justify-center pb-4">
+          {blog.frontmatter.keywords.splice(0, 3).map((keyword: string) => (
+            <span
+              key={keyword}
+              className={cn(
+                ' badge badge-outline badge-sm',
+                'mr-3 text-slate-500',
+              )}
+            >
+              {keyword}
+            </span>
+          ))}
+        </div>
+      )}
+      <h1 className="my-4 text-center text-4xl font-bold">
+        {blog.frontmatter.title}
+      </h1>
+      <div className=" flex items-center justify-center gap-4">
+        <p className=" text-xs text-slate-500">{blog.frontmatter.author}</p>
+        <p className="text-xs text-slate-500">
           {new Date(blog.frontmatter.date).toLocaleString('uk-UA', {
             dateStyle: 'full',
           })}

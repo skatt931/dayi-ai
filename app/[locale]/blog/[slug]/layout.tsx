@@ -5,9 +5,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div className={cn('mx-auto h-full w-full max-w-4xl py-10', 'text-red')}>
-      {children}
-    </div>
-  );
+  return <div className="mx-auto h-full w-full max-w-4xl">{children}</div>;
 }

@@ -3,7 +3,6 @@
 import { useGetDocumentById } from '@/hooks/useGetDocuments';
 import { cn } from '@/lib/utils';
 import { CATEGORIES, type AiToolData } from '@/types';
-import { set } from 'firebase/database';
 import { ExternalLink, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';

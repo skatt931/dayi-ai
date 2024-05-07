@@ -1,3 +1,5 @@
+'use client';
+
 import { PAGE_SIZE } from '@/constants';
 import { AiToolContext } from '@/context/aiToolContext';
 import {

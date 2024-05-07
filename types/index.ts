@@ -5,13 +5,13 @@ export type AiToolData = {
   promoted: boolean;
   pros: string[];
   cons: string[];
-  categories: string[];
-  specialTags: string[];
+  categories: CATEGORIES[];
+  specialTags: SPECIAL_TAGS[];
   title: string;
   shortDescription: string;
   completeDescription?: string;
   imageUrl: string;
-  pricing: string;
+  pricing: PRICING;
   linkToTool: string;
   likes: number;
   docID?: string;

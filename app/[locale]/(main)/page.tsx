@@ -4,7 +4,7 @@
 import DialogWindow from '@/components/ui/DialogWindow';
 import Filters from '@/components/ui/filters';
 import Search from '@/components/ui/search';
-import Skeleton from '@/components/ui/Skeleton';
+import Skeleton from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { Filter } from 'lucide-react';
 import { useTranslations } from 'next-intl';

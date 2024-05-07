@@ -1,5 +1,6 @@
 'use client';
 
+import LikesCounter from '@/components/ui/LikesCounter';
 import { useGetDocumentById } from '@/hooks/useGetDocuments';
 import { cn } from '@/lib/utils';
 import { CATEGORIES, type AiToolData } from '@/types';
@@ -82,13 +83,17 @@ const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
                     <div className="badge badge-primary">
                       {aiToolData?.pricing}
                     </div>
-                    <div>
-                      <TwitterShareButton
+                    <div className="self-end">
+                      {/* <LikesCounter
+                        likesNumber={aiToolData?.likes}
+                        toolId={aiToolData?.docID}
+                      /> */}
+                      {/* <TwitterShareButton
                         url={location.href}
                         title={aiToolData?.title}
                       >
                         Share
-                      </TwitterShareButton>
+                      </TwitterShareButton> */}
                     </div>
                   </div>
                   {!!aiToolData?.categories && (

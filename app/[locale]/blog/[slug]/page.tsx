@@ -14,7 +14,7 @@ export async function generateMetadata({
   return {
     title: blog.frontmatter.title,
     description: blog.frontmatter.description,
-    applicationName: 'Дай[ ai ] - Блог',
+    applicationName: 'Дай [ ai ] - Блог',
     authors: {
       name: blog.frontmatter.author,
     },
@@ -23,7 +23,16 @@ export async function generateMetadata({
       title: blog.frontmatter.title,
       description: blog.frontmatter.description,
       type: 'article',
-      // images: [blog.frontmatter.image],
+      publishedTime: new Date(blog.frontmatter.date).toISOString(),
+      modifiedTime: new Date(blog.frontmatter.date).toISOString(),
+      images: [
+        {
+          url: blog.frontmatter.image,
+          width: 1200,
+          height: 630,
+          alt: blog.frontmatter.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
@@ -31,7 +40,12 @@ export async function generateMetadata({
       creator: '@dai_ai',
       description: blog.frontmatter.description,
       title: blog.frontmatter.title,
-      images: [blog.frontmatter.image],
+      images: [
+        {
+          url: blog.frontmatter.image,
+          alt: blog.frontmatter.title,
+        },
+      ],
     },
   };
 }

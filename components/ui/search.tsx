@@ -16,11 +16,14 @@ const Search = () => {
     const params = new URLSearchParams(searchParams || '');
     if (term) {
       params.set('search', term);
+      if (params.has('page')) {
+        params.set('page', '1');
+      }
     } else {
       params.delete('search');
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, 300);
+  }, 500);
 
   function handleSortChange(sortParam: string) {
     const params = new URLSearchParams(searchParams || '');
@@ -48,7 +51,10 @@ const Search = () => {
         </div>
       </div>
       <select
-        className={cn('join-item select select-bordered', 'w-1/3 basis-1/3')}
+        className={cn(
+          'join-item select select-bordered',
+          'w-1/3 max-w-full basis-1/3',
+        )}
         onChange={(e) => handleSortChange(e.target.value)}
         defaultValue={searchParams?.get('sort')?.toString() || 'sort'}
         aria-label={t('sort.ariaLabel')}

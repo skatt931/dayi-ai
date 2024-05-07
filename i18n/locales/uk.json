@@ -64,8 +64,8 @@
   },
   "Contact": {
     "form": {
-      "name": "Ім'я",
-      "namePlaceholder": "Повне ім'я",
+      "name": "Повне Ім'я",
+      "namePlaceholder": "Петро Петренко",
       "email": "Email",
       "emailPlaceholder": "example@domain.com",
       "message": "Повідомлення",
@@ -86,6 +86,6 @@
     "email": "Напишіть нам",
     "privacy": "Політика конфіденційності",
     "terms": "Умови використання",
-    "copyright": "Copyright © 2024 - Всі права захищені Дай [ ai ]"
+    "copyright": "© 2024 - Всі права захищені Дай [ ai ]"
   }
 }

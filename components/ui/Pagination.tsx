@@ -22,6 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalCount, currentPage }) => {
       params.delete('page');
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
+    window.scroll({ top: 300 });
   };
 
   const paginationRange = usePagination({

@@ -5,19 +5,25 @@ import Link from 'next/link';
 
 export default async function Blogs() {
   const blogs = await getBlogs();
+  const sortedBlogs = blogs.sort((a, b) => {
+    return (
+      new Date(b.frontmatter.date).getTime() -
+      new Date(a.frontmatter.date).getTime()
+    );
+  });
   const t = await getTranslations('Blog');
 
   return (
     <div className="container mx-auto pb-10 pt-5">
       <h1 className="mb-10 text-center text-3xl font-bold ">{t('header')}</h1>
       <div className="mx-auto flex flex-wrap justify-around gap-6">
-        {blogs.map((blog) => {
+        {sortedBlogs.map((blog) => {
           const slug = blog.slug;
           return (
             <Link
               key={slug}
               href={`blog/${slug}`}
-              className="card w-96 border border-base-300 bg-gradient-to-b from-accent/5 to-secondary/10 text-base-content transition-all hover:border-violet-200 hover:shadow-[0_0_15px_theme(colors.violet.200),0_0_15px_theme(colors.violet.500)]"
+              className="card w-96 border border-base-300 bg-base-200 text-base-content transition-all md:hover:scale-105"
             >
               <figure className="w-full">
                 <Image

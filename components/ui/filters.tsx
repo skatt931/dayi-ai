@@ -41,7 +41,7 @@ const Filters = () => {
   return (
     <form
       ref={formRef}
-      className="grid grid-cols-3 justify-items-start md:grid md:grid-cols-6"
+      className="grid grid-cols-2 justify-items-start md:grid md:grid-cols-6"
     >
       {categoryValues.map((filter) => (
         <div
@@ -73,7 +73,12 @@ const Filters = () => {
               }
             />
 
-            <div className={cn('label-text', 'cursor-pointer text-xs')}>
+            <div
+              className={cn(
+                'label-text',
+                'cursor-pointer text-wrap break-words text-xs',
+              )}
+            >
               {filter.replace(/_/g, ' ')}
             </div>
           </label>

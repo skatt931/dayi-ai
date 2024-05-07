@@ -9,6 +9,7 @@ import GoogleAnalytics from '@/GoogleAnalytics';
 import { cn } from '@/lib/utils';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { ThemeProvider } from 'next-themes';
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -68,6 +69,9 @@ export default function RootLayout({
   const messages = useMessages();
   return (
     <html lang={locale} suppressHydrationWarning>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <GoogleAnalytics />
       <body className={cn(inter.className, 'relative')}>
         <NextIntlClientProvider locale={locale} messages={messages}>

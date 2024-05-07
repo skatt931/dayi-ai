@@ -1,19 +1,17 @@
-import { Link } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 import React from 'react';
 
-const Footer = async () => {
-  const t = await getTranslations('Footer');
-
+const Footer = () => {
   return (
-    <footer className="footer footer-center rounded bg-base-200 p-10 text-base-content">
+    <footer className="footer footer-center bg-base-200 p-10 text-base-content">
       <nav className="grid grid-flow-col gap-4">
         <Link
           href="/"
           aria-label="visit-placeholder"
           className="link-hover link"
         >
-          Про нас
+          <p>Про нас</p>
         </Link>
         <Link
           href="/"
@@ -34,12 +32,15 @@ const Footer = async () => {
           aria-label="visit-placeholder"
           className="link-hover link"
         >
-          Домашня сторінка
+          Головна
         </Link>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
-          <Link href="/" aria-label="visit-placeholder">
+          <Link
+            href="https://github.com/skatt931/dayi-ai/"
+            aria-label="visit-placeholder"
+          >
             <svg
               role="img"
               width="24"
@@ -88,7 +89,7 @@ const Footer = async () => {
         </div>
       </nav>
       <aside>
-        <p>Copyright © 2024 - Всі права захищені Дай [ ai ]</p>
+        <p>© 2024 - Всі права захищені Дай [ ai ]</p>
       </aside>
     </footer>
   );

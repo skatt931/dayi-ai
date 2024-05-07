@@ -60,4 +60,5 @@ export enum PRICING {
 export enum SPECIAL_TAGS {
   MADE_IN_UKRAINE,
   PROMOTED,
+  DAI_AI_CHOICE,
 }

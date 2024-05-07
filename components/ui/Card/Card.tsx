@@ -28,8 +28,10 @@ const Card: React.FC<AiToolData> = ({
     <Link href={`/uk/${docID}`} key={id}>
       <div
         className={cn(
-          'card card-side card-compact w-full bg-base-100 shadow-xl',
-          `to-primary-dark m-auto h-48  bg-accent/5 transition-all md:hover:h-[101%] md:hover:w-[101%] md:hover:-translate-y-1 md:hover:shadow-[0_0_15px_theme(colors.violet.200),0_0_15px_theme(colors.violet.600)] lg:min-h-48 lg:min-w-96 lg:max-w-none lg:p-0 ${promoted && 'shadow-[0_0_15px_theme(colors.blue.200),0_0_15px_theme(colors.blue.600)]'}`,
+          'card card-side card-compact w-full shadow-xl',
+          `m-auto box-content h-48 
+          bg-accent/10 lg:min-h-48 lg:min-w-96 lg:max-w-none lg:p-0 ${promoted && 'shadow-[0_0_15px_theme(colors.blue.200),0_0_15px_theme(colors.blue.600)]'}`,
+          'transition-all md:hover:scale-105',
         )}
       >
         <figure className="w-3/6 md:w-2/6 lg:w-5/12">
@@ -71,9 +73,12 @@ const Card: React.FC<AiToolData> = ({
               </div>
             ))} */}
           <p
-            className={cn('h-10 overflow-hidden overflow-ellipsis', 'text-sm')}
+            className={cn(
+              'h-10 overflow-hidden overflow-ellipsis',
+              'text-xs md:text-sm',
+            )}
           >
-            <span className="hidden md:block">{shortDescription}</span>
+            <span className="">{shortDescription}</span>
           </p>
           <div className={(cn('card-actions'), 'flex justify-between')}>
             <div className={cn('badge badge-primary', 'text-xs text-black')}>

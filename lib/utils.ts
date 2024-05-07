@@ -46,12 +46,12 @@ export const sortTools = (
 ): AiToolData[] => {
   let sortedTools = [...aiTools];
   const sortFunctions: SortFunctions = {
-    new: (a, b) => a.id - b.id,
+    new: (a, b) => b.updatedAt - a.updatedAt,
     popular: (a, b) => b.likes - a.likes,
     az: (a, b) => a.title.localeCompare(b.title),
     za: (a, b) => b.title.localeCompare(a.title),
-    'new-old': (a, b) => a.createdAt - b.createdAt,
-    'old-new': (a, b) => b.createdAt - a.createdAt,
+    'new-old': (a, b) => b.createdAt - a.createdAt,
+    'old-new': (a, b) => a.createdAt - b.createdAt,
   };
 
   if (sortFunctions[sortQuery]) {

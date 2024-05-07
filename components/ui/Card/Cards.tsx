@@ -68,7 +68,7 @@ const Cards = () => {
           <Card key={tool.id} {...tool} />
         ))}
       </div>
-      <div className="my-10 flex justify-center">
+      <div className="mt-10 flex justify-center">
         <Pagination
           totalCount={filteredTools.length}
           currentPage={parseInt(pageQuery)}

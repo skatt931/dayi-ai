@@ -1,14 +1,16 @@
 'use client';
 
-import Cards from '@/components/ui/Card/Cards';
+// import Cards from '@/components/ui/Card/Cards';
 import DialogWindow from '@/components/ui/DialogWindow';
 import Filters from '@/components/ui/filters';
-import Message from '@/components/ui/Message';
 import Search from '@/components/ui/search';
+import Skeleton from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { Filter } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
+
+const Cards = React.lazy(() => import('@/components/ui/Card/Cards'));
 
 export type TagsData = {
   id: number;
@@ -34,7 +36,7 @@ export default function Home({
   const pageQuery = searchParams?.page || '1';
 
   return (
-    <div className="pb-20">
+    <div className="pb-10">
       <div
         className={cn(
           'container hero',
@@ -81,11 +83,9 @@ export default function Home({
         <Suspense
           key={searchQuery + sortParam + filterQuery + pageQuery}
           fallback={
-            <div className="h-96 w-96">
+            <div className="container mx-auto grid place-content-between gap-10 px-4 transition-all md:grid-cols-2 md:p-4">
               {[1, 2, 3, 4, 5, 6].map((id) => (
-                <div key={id} className="card bg-base-200">
-                  Test
-                </div>
+                <Skeleton key={id} />
               ))}
             </div>
           }

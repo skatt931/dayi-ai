@@ -1,51 +1,24 @@
-'use client';
-
 import LikesCounter from '@/components/ui/LikesCounter';
 import { useGetDocumentById } from '@/hooks/useGetDocuments';
 import { cn } from '@/lib/utils';
 import { CATEGORIES, type AiToolData } from '@/types';
 import { ExternalLink, ThumbsDown, ThumbsUp } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import Head from 'next/head';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Suspense, useEffect } from 'react';
+import React from 'react';
 import { TwitterShareButton } from 'react-share';
 import SimilarTools from './components/SimilarTools';
 
-const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
-  const [aiToolData, setAiToolData] = React.useState<AiToolData | null>(null);
-  const t = useTranslations('ToolPage');
+const Tool = async ({ params: { toolId } }: { params: { toolId: string } }) => {
+  const t = await getTranslations('ToolPage');
   const { getDocById } = useGetDocumentById();
 
-  useEffect(() => {
-    getDocById('tools', toolId).then((data: unknown) => {
-      setAiToolData(data as AiToolData);
-    });
-  }, []);
+  const aiToolData = (await getDocById('tools', toolId)) as AiToolData;
 
   return (
     <>
-      <Head>
-        <title>{aiToolData?.title}</title>
-        <meta name="description" content={aiToolData?.shortDescription} />
-        <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content={aiToolData?.title} />
-        <meta
-          property="og:description"
-          content={aiToolData?.shortDescription}
-        />
-        <meta property="og:image" content={aiToolData?.imageUrl} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@дай[ai]" />
-        <meta name="twitter:creator" content="@дай[ai]" />
-        <meta name="twitter:title" content={aiToolData?.title} />
-        <meta
-          name="twitter:description"
-          content={aiToolData?.shortDescription}
-        />
-        <meta name="twitter:image" content={aiToolData?.imageUrl} />
-      </Head>
       <div className="to-primary-dark bg-secondary/5 pb-10">
         <div className="bg-current-200 container hero h-auto w-full max-w-full overflow-hidden py-5 md:py-10">
           <div className={cn('hero-content text-center', 'w-full lg:px-0')}>
@@ -185,5 +158,48 @@ const Tool = ({ params: { toolId } }: { params: { toolId: string } }) => {
     </>
   );
 };
+
+export async function generateMetadata({
+  params: { toolId },
+}: {
+  params: {
+    toolId: string;
+  };
+}): Promise<Metadata> {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { getDocById } = useGetDocumentById();
+  const aiToolData = (await getDocById('tools', toolId)) as AiToolData;
+  return {
+    title: aiToolData.title,
+    description: aiToolData.shortDescription,
+    keywords: aiToolData.categories,
+    openGraph: {
+      title: aiToolData.title,
+      description: aiToolData.shortDescription,
+      type: 'website',
+      images: [
+        {
+          url: aiToolData.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: aiToolData.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@dai_ai',
+      creator: '@dai_ai',
+      description: aiToolData.shortDescription,
+      title: aiToolData.title,
+      images: [
+        {
+          url: aiToolData.imageUrl,
+          alt: aiToolData.title,
+        },
+      ],
+    },
+  };
+}
 
 export default Tool;

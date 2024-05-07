@@ -1,14 +1,10 @@
-'use client';
-
-// import Cards from '@/components/ui/Card/Cards';
 import DialogWindow from '@/components/ui/DialogWindow';
 import Filters from '@/components/ui/filters';
+import MobileFilter from '@/components/ui/MobileFilter';
 import Search from '@/components/ui/search';
-import Skeleton from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
-import { Filter } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React, { Suspense } from 'react';
+import { getTranslations } from 'next-intl/server';
+import React from 'react';
 
 const Cards = React.lazy(() => import('@/components/ui/Card/Cards'));
 
@@ -18,7 +14,7 @@ export type TagsData = {
   name: string;
 };
 
-export default function Home({
+export default async function Home({
   searchParams,
 }: {
   searchParams?: {
@@ -28,7 +24,7 @@ export default function Home({
     page?: string;
   };
 }) {
-  const t = useTranslations('Hero');
+  const t = await getTranslations('Hero');
 
   const searchQuery = searchParams?.search || '';
   const sortParam = searchParams?.sort || 'new';
@@ -59,39 +55,13 @@ export default function Home({
               <Filters />
             </div>
             <section className="sticky top-10 mt-10 bg-base-200 md:hidden">
-              <ul className="menu rounded-box bg-base-200 lg:menu-horizontal">
-                <li>
-                  <a
-                    onClick={() =>
-                      // @ts-ignore
-                      document?.getElementById('my_modal')?.showModal()
-                    }
-                  >
-                    <Filter />
-                    Фільтри
-                    <span className="badge badge-secondary">
-                      {filterQuery ? filterQuery.split(',').length : 0}
-                    </span>
-                  </a>
-                </li>
-              </ul>
+              <MobileFilter filterQuery={filterQuery} />
             </section>
           </div>
         </div>
       </div>
       <section>
-        <Suspense
-          key={searchQuery + sortParam + filterQuery + pageQuery}
-          fallback={
-            <div className="container mx-auto grid place-content-between gap-10 px-4 transition-all md:grid-cols-2 md:p-4">
-              {[1, 2, 3, 4, 5, 6].map((id) => (
-                <Skeleton key={id} />
-              ))}
-            </div>
-          }
-        >
-          <Cards />
-        </Suspense>
+        <Cards />
       </section>
       <DialogWindow />
     </div>

@@ -44,7 +44,7 @@ export const sortTools = (
   sortQuery: string,
   aiTools: AiToolData[],
 ): AiToolData[] => {
-  let sortedTools = [...aiTools];
+  let sortedTools = aiTools;
   const sortFunctions: SortFunctions = {
     new: (a, b) => b.updatedAt - a.updatedAt,
     popular: (a, b) => b.likes - a.likes,
